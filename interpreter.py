@@ -55,6 +55,12 @@ def exp(_stack):
         return _stack[:-1]
 
 
+def swap(_stack):
+    if len(_stack) > 1:
+        _stack[-2], _stack[-1] = _stack[-1], _stack[-2]
+        return _stack
+
+
 commands = {
     '+': add,
     '-': sub,
@@ -65,6 +71,7 @@ commands = {
     'C': lambda x: char_print(x, upper=True),
     's': sqr,
     'e': exp,
+    '\\': swap,
 }
 
 
@@ -126,3 +133,4 @@ assert parse('   12+34+56;|10|') == [3, 7, 5, 6, 5, 6]
 assert parse('    12+34+56;|10|') == [3, 7, 11, 5, 6]
 assert parse('4s') == [2]
 assert parse('22e') == [4]
+assert parse('12\\') == [2, 1]

@@ -15,3 +15,4 @@ Supports the following things:
 1. Exponential multiplication `e`. 
 1. Printing the stack `p`.
 1. Printing the stack as a string `c` or `C` for upper case printing. `c` doesn't change the case at all.
+1. Swap the top of the stack `\`
