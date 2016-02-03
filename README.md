@@ -1,5 +1,5 @@
 # Pylons-lang
-Python based golf language.
+Python 3 based golf language.
 
 Pretty basic stack based language. Mostly just doing this because I want to get a better feel for how stack based languages work.
 
@@ -16,3 +16,4 @@ Supports the following things:
 1. Printing the stack `p`.
 1. Printing the stack as a string `c` or `C` for upper case printing. `c` doesn't change the case at all.
 1. Swap the top of the stack `\`
+1. Variables with `:name(value or block)`. Ex: `:A1`. Currently these all have to be declared at the start of the program and must be constant values.

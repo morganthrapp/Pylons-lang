@@ -4,6 +4,7 @@ BLOCK_SEP = '|'
 LOOP_START = '{'
 LOOP_END = '}'
 POINTER_SET = ';'
+VARIABLE = '='
 
 
 def add(_stack):
@@ -88,20 +89,36 @@ def parse_block(instruction_slice, _pointer=None):
         return instruction_slice[:block_end] or instruction_slice
 
 
-def parse(instructions, stack=None, pointer=0):
+def parse(instructions, stack=None, pointer=0, global_vars=None):
     if not stack:
         stack = []
+    if not global_vars:
+        global_vars = {}
+    for key, value in global_vars.items():
+        instructions = instructions.replace(key, value)
     while pointer < len(instructions):
         command = instructions[pointer]
         pointer += 1
         if command == POINTER_SET:
             command = instructions[pointer]
-            if command.startswith(BLOCK_SEP):
+            if command == BLOCK_SEP:
                 new_pointer, pointer = parse_block(instructions[pointer+1:], pointer)
             else:
                 new_pointer = command
                 pointer += 1
-            return parse(instructions[:instructions.find(POINTER_SET)] + instructions[pointer:], stack, int(new_pointer)-1)
+            return parse(instructions[:instructions.find(POINTER_SET)] + instructions[pointer:], stack, int(new_pointer)-1, global_vars)
+        if command == VARIABLE:
+            pointer += 1
+            variable_name = instructions[pointer]
+            pointer += 1
+            command = instructions[pointer]
+            if command == BLOCK_SEP:
+                value, pointer = parse_block(instructions[pointer:], pointer)
+            else:
+                value = command
+                pointer += 1
+            global_vars = {variable_name: value}
+            return parse(instructions[pointer:], stack, pointer, global_vars)
         if command == LOOP_START:
             start = pointer
             while instructions[pointer] != LOOP_END:
@@ -134,3 +151,4 @@ assert parse('    12+34+56;|10|') == [3, 7, 11, 5, 6]
 assert parse('4s') == [2]
 assert parse('22e') == [4]
 assert parse('12\\') == [2, 1]
+assert parse(':A1A2+') == [3]
