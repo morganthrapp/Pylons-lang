@@ -1,5 +1,5 @@
-from .constants import BLOCK_SEP, LOOP_END, VARIABLE_END
-from .types import Block, Loop, Variable, PointerSetter, JumpZero
+from .constants import BLOCK_SEP, LOOP_END, VARIABLE_END, FUNCTION_END
+from .types import Block, Loop, Variable, PointerSetter, JumpZero, Function
 
 
 def parse_block(instructions, pointer=0):
@@ -65,3 +65,13 @@ def parse_variable(instructions, pointer):
 
 def parse_jump_if_zero(instructions, pointer):
     return pointer + 1, JumpZero()
+
+
+def parse_function(instructions, pointer):
+    pointer += 1
+    function_name = instructions[pointer]
+    pointer += 1
+    function_end_location = instructions.find(FUNCTION_END)
+    command = instructions[pointer:function_end_location]
+    pointer += len(command) + 1  # Set the pointer to after the function block.
+    return pointer, Function(function_name, command)

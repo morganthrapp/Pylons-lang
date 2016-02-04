@@ -22,3 +22,9 @@ class PointerSetter:
 
 class JumpZero:
     pass
+
+
+class Function:
+    def __init__(self, name, command):
+        self.name = name
+        self.command = command

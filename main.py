@@ -1,12 +1,14 @@
-from interpreter.constants import COMPLEX_TOKENS, COMMANDS
-from interpreter.types import Block, Loop, Variable, PointerSetter, JumpZero
+from interpreter.constants import COMPLEX_TOKENS, COMMANDS, FUNCTION_ARG
+from interpreter.types import Block, Loop, Variable, PointerSetter, JumpZero, Function
 
 
-def run(instructions, stack=None, pointer=0, global_vars=None):
+def run(instructions, stack=None, pointer=0, global_vars=None, functions=None):
     if not stack:
         stack = []
     if not global_vars:
         global_vars = {}
+    if not functions:
+        functions = {}
     tokens = tokenize(instructions)
     num_tokens = len(tokens)  # We do this so that once we remove a token, the other addresses stay static.
     while pointer < num_tokens:
@@ -22,6 +24,13 @@ def run(instructions, stack=None, pointer=0, global_vars=None):
             tokens[pointer] = None
             pointer = token.location
             continue
+        elif isinstance(token, Function):
+            command = token.command
+            index = -1
+            while FUNCTION_ARG in command:
+                command = command.replace(FUNCTION_ARG, stack[index], replace=1)
+                index -= 1
+            functions[token.name] = token.command
         elif isinstance(token, JumpZero):
             if stack[-1] == 0:
                 continue
@@ -32,8 +41,10 @@ def run(instructions, stack=None, pointer=0, global_vars=None):
             stack.append(int(token))
         elif token in COMMANDS:
             stack = COMMANDS[token](stack)
-        elif token.isupper():
+        elif token in global_vars:
             stack.append(global_vars[token])
+        elif token in functions:
+            stack = run(functions[token], stack=stack, global_vars=global_vars, functions=functions)
         pointer += 1
     return stack
 
