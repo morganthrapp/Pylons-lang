@@ -6,7 +6,7 @@ class Block:
 class Loop:
     def __init__(self, command, iterations):
         self.command = command
-        self.iterations = int(iterations)
+        self.iterations = iterations
 
 
 class Variable:

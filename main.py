@@ -30,7 +30,11 @@ def run(instructions, stack=None, pointer=0, global_vars=None, functions=None):
             if stack[-1] == 0:
                 continue
         elif isinstance(token, Loop):
-            for _ in range(token.iterations):
+            if str(token.iterations).isnumeric():
+                iterations = int(token.iterations)
+            else:
+                iterations = sum(run(token.iterations, global_vars=global_vars, functions=functions))
+            for _ in range(iterations):
                 stack = run(token.command, stack=stack, global_vars=global_vars, functions=functions)
         elif token.isnumeric():
             stack.append(int(token))
