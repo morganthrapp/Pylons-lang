@@ -9,6 +9,7 @@ JUMP_IF_ZERO = 'z'
 FUNCTION_START = 'f'
 FUNCTION_END = '@'
 FUNCTION_ARG = '.'
+STRING_MODE = '"'
 
 # This is so that we don't get circular imports.
 from .parse_ops import parse_variable, parse_set_pointer, parse_constant, parse_loop, parse_block, parse_jump_if_zero, \

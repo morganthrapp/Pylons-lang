@@ -1,4 +1,4 @@
-from interpreter.constants import COMPLEX_TOKENS, COMMANDS, FUNCTION_ARG
+from interpreter.constants import COMPLEX_TOKENS, COMMANDS, FUNCTION_ARG, STRING_MODE
 from interpreter.types import Block, Loop, Variable, PointerSetter, JumpZero, Function
 
 
@@ -52,19 +52,26 @@ def run(instructions, stack=None, pointer=0, global_vars=None, functions=None):
 def tokenize(instructions):
     tokens = []
     pointer = 0
+    string_mode = False
     while pointer < len(instructions):
-        command = instructions[pointer]
-        if command in COMPLEX_TOKENS:
-            pointer, token = COMPLEX_TOKENS[command](instructions, pointer)
+        token = instructions[pointer]
+        if token == STRING_MODE:
+            string_mode = not string_mode
+            pointer += 1
+        elif string_mode:
+            tokens.append(str(ord(token)))
+            pointer += 1
+        elif token in COMPLEX_TOKENS:
+            pointer, token = COMPLEX_TOKENS[token](instructions, pointer)
             tokens.append(token)
-        elif command in COMMANDS:
-            tokens.append(command)
+        elif token in COMMANDS:
+            tokens.append(token)
             pointer += 1
-        elif command.isnumeric():
-            tokens.append(command)
+        elif token.isnumeric():
+            tokens.append(token)
             pointer += 1
-        elif command.isupper():
-            tokens.append(command)
+        elif token.isupper():
+            tokens.append(token)
             pointer += 1
         else:
             pointer += 1  # If we find a command we don't recognize, just skip it.

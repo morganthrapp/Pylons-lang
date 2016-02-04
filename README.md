@@ -25,4 +25,4 @@ Supports the following things:
 1. Variables with `[name(value or block)]`. Ex: `[A12+] == [3]` or `[A#11#2+]A == [13]`. Variables can only be an integer, not complex types for now.
 1. Taking command line input with `i`.
 1. Set the stack pointer to a specific location `;(value or block)`. Zero indexed.
-1. Functions with `f(name)(body)@`. Uses `.` for args that get replaced with the top of the stack left to right. Not super stable right now.
+1. Functions with `f(name)(body)@`. Uses `.` for args that get replaced with the top of the stack left to right. Not super stable right now. Ex. `2fA2+@ == [4]` 
