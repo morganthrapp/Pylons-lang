@@ -31,7 +31,7 @@ def run(instructions, stack=None, pointer=0, global_vars=None, functions=None):
                 continue
         elif isinstance(token, Loop):
             for _ in range(token.iterations):
-                stack = run(token.command, stack=stack, global_vars=global_vars)
+                stack = run(token.command, stack=stack, global_vars=global_vars, functions=functions)
         elif token.isnumeric():
             stack.append(int(token))
         elif token in COMMANDS:
