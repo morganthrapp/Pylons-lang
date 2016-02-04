@@ -140,3 +140,27 @@ def bitwise_rshift(_stack):
         return _stack[:-1]
     else:
         return _stack
+
+
+def stack_sum(_stack):
+    return [sum(_stack)]
+
+
+def stack_len(_stack):
+    return [len(_stack)]
+
+
+def clear_stack(_stack):
+    return []
+
+
+def pop_stack(_stack):
+    return [_stack[:-1]]
+
+
+def get_top(_stack):
+    return [_stack[-1]]
+
+
+def get_bottom(_stack):
+    return [_stack[0]]

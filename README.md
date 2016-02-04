@@ -26,3 +26,8 @@ Supports the following things:
 1. Taking command line input with `i`.
 1. Set the stack pointer to a specific location `;(value or block)`. Zero indexed.
 1. Functions with `f(name)(body)@`. Uses `.` for args that get replaced with the top of the stack left to right. Not super stable right now. Ex. `2fA2+@ == [4]` 
+1. Sum the stack with `s`. Sets the stack equal to the sum of the stack.
+1. Append the length of the stack with `l`. Sets the stack equal to the length of the stack before this command.
+1. Clear the stack with `x`.
+1. Discard the top of the stack with `,`.
+1. Get the top/bottom of the stack with `t` and `b` respectively. Sets the stack/variable to the top/bottom of the stack.
