@@ -103,7 +103,7 @@ def bitwise_xor(_stack):
         return _stack[:-1]
     else:
         return _stack
-    
+
 
 def bitwise_or(_stack):
     if len(_stack) > 1:
@@ -112,7 +112,7 @@ def bitwise_or(_stack):
         return _stack[:-1]
     else:
         return _stack
-    
+
 
 def bitwise_twos(_stack):
     new_val = ~_stack[-1]
@@ -127,6 +127,7 @@ def bitwise_lshift(_stack):
         return _stack[:-1]
     else:
         return _stack
+
 
 def bitwise_rshift(_stack):
     if len(_stack) > 1:
