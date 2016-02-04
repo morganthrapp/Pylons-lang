@@ -25,11 +25,6 @@ def run(instructions, stack=None, pointer=0, global_vars=None, functions=None):
             pointer = token.location
             continue
         elif isinstance(token, Function):
-            command = token.command
-            index = -1
-            while FUNCTION_ARG in command:
-                command = command.replace(FUNCTION_ARG, stack[index], replace=1)
-                index -= 1
             functions[token.name] = token.command
         elif isinstance(token, JumpZero):
             if stack[-1] == 0:
@@ -44,7 +39,12 @@ def run(instructions, stack=None, pointer=0, global_vars=None, functions=None):
         elif token in global_vars:
             stack.append(global_vars[token])
         elif token in functions:
-            stack = run(functions[token], stack=stack, global_vars=global_vars, functions=functions)
+            command = functions[token]
+            index = -1
+            while FUNCTION_ARG in command:
+                command = command.replace(FUNCTION_ARG, str(stack[index]), 1)
+                index -= 1
+            stack = run(command, stack=stack, global_vars=global_vars, functions=functions)
         pointer += 1
     return stack
 
