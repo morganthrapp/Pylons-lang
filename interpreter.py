@@ -69,7 +69,6 @@ commands = {
     '/': div,
     'p': print,
     'c': char_print,
-    'C': lambda x: char_print(x, upper=True),
     's': sqr,
     'e': exp,
     '\\': swap,

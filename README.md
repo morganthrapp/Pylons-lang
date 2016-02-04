@@ -14,6 +14,6 @@ Supports the following things:
 1. Square root `s`. Sets the top of the stack equal to the square root of the previous top of stack. Ex. `4s == [2]`
 1. Exponential multiplication `e`. 
 1. Printing the stack `p`.
-1. Printing the stack as a string `c` or `C` for upper case printing. `c` doesn't change the case at all.
+1. Printing the stack as a string `c`.
 1. Swap the top of the stack `\`
 1. Variables with `:name(value or block)`. Ex: `:A1`. Currently these all have to be declared at the start of the program and must be constant values.
