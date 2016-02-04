@@ -42,7 +42,7 @@ def run(instructions, stack=None, pointer=0, global_vars=None, functions=None):
             command = functions[token]
             index = -1
             while FUNCTION_ARG in command:
-                command = command.replace(FUNCTION_ARG, str(stack[index]), 1)
+                command = command.replace(FUNCTION_ARG, '#{}#'.format(str(stack[index])), 1)
                 index -= 1
             stack = run(command, stack=stack, global_vars=global_vars, functions=functions)
         pointer += 1
