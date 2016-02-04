@@ -1,4 +1,5 @@
 import math
+import sys
 
 BLOCK_SEP = '|'
 LOOP_START = '{'
@@ -64,17 +65,28 @@ def swap(_stack):
         return _stack
 
 
+def print_stack(_stack):
+    print(_stack)
+    return _stack
+
+
+def get_input(_stack):
+    for arg in sys.argv[1:]:
+        _stack.append(int(arg))
+    return _stack
+
+
 commands = {
     '+': add,
     '-': sub,
     '*': mul,
     '/': div,
-    'p': print,
+    'p': print_stack,
     'c': char_print,
     's': sqr,
     'e': exp,
     '\\': swap,
-    'i': input
+    'i': get_input,
 }
 
 
@@ -168,7 +180,7 @@ assert parse('|25|2+7*') == [189]
 assert parse('48*') == [4 * 8]
 assert parse('1{1+,3}') == [4]
 assert parse('1{1+,|11|}') == [12]
-parse('|72||101|c')
+assert parse('|72||101|c') == [72, 101]
 assert parse('12+;1') == [3, 3]
 assert parse('12+;14+') == [3, 7]
 assert parse('   12+34+56;|10|') == [3, 7, 5, 6, 5, 6]
@@ -179,3 +191,5 @@ assert parse('12\\') == [2, 1]
 assert parse(':A1A2+') == [3]
 assert parse('[A12+]A2A+') == [3, 5]
 assert parse('[A|11|2+]A') == [13]
+assert parse('23p') == [2, 3]  # Should also print [2, 3]
+assert parse('2i+') == [4]  # This takes input of 2 and returns 4
