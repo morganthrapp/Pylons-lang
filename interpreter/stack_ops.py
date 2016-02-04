@@ -7,6 +7,8 @@ def add(_stack):
         new_val = _stack[-1] + _stack[-2]
         _stack[-2] = new_val
         return _stack[:-1]
+    else:
+        return _stack
 
 
 def sub(_stack):
@@ -14,6 +16,8 @@ def sub(_stack):
         new_val = _stack[-1] - _stack[-2]
         _stack[-2] = new_val
         return _stack[:-1]
+    else:
+        return _stack
 
 
 def mul(_stack):
@@ -21,6 +25,8 @@ def mul(_stack):
         new_val = _stack[-1] * _stack[-2]
         _stack[-2] = new_val
         return _stack[:-1]
+    else:
+        return _stack
 
 
 def div(_stack):
@@ -28,6 +34,8 @@ def div(_stack):
         new_val = _stack[-1] / _stack[-2]
         _stack[-2] = new_val
         return _stack[:-1]
+    else:
+        return _stack
 
 
 def char_print(_stack, upper=False):
@@ -49,6 +57,8 @@ def exp(_stack):
         new_val = _stack[-1] ** _stack[-2]
         _stack[-2] = new_val
         return _stack[:-1]
+    else:
+        return _stack
 
 
 def swap(_stack):
@@ -66,3 +76,62 @@ def get_input(_stack):
     for arg in sys.argv[1:]:
         _stack.append(int(arg))
     return _stack
+
+
+def mod(_stack):
+    if len(_stack) > 1:
+        new_val = _stack[-1] % _stack[-2]
+        _stack[-2] = new_val
+        return _stack[:-1]
+    else:
+        return _stack
+
+
+def bitwise_and(_stack):
+    if len(_stack) > 1:
+        new_val = _stack[-1] & _stack[-2]
+        _stack[-2] = new_val
+        return _stack[:-1]
+    else:
+        return _stack
+
+
+def bitwise_xor(_stack):
+    if len(_stack) > 1:
+        new_val = _stack[-1] ^ _stack[-2]
+        _stack[-2] = new_val
+        return _stack[:-1]
+    else:
+        return _stack
+    
+
+def bitwise_or(_stack):
+    if len(_stack) > 1:
+        new_val = _stack[-1] | _stack[-2]
+        _stack[-2] = new_val
+        return _stack[:-1]
+    else:
+        return _stack
+    
+
+def bitwise_twos(_stack):
+    new_val = ~_stack[-1]
+    _stack[-1] = new_val
+    return _stack
+
+
+def bitwise_lshift(_stack):
+    if len(_stack) > 1:
+        new_val = _stack[-1] << _stack[-2]
+        _stack[-2] = new_val
+        return _stack[:-1]
+    else:
+        return _stack
+
+def bitwise_rshift(_stack):
+    if len(_stack) > 1:
+        new_val = _stack[-1] >> _stack[-2]
+        _stack[-2] = new_val
+        return _stack[:-1]
+    else:
+        return _stack

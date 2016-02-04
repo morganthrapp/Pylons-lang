@@ -7,8 +7,11 @@ VARIABLE_START = '['
 VARIABLE_END = ']'
 JUMP_IF_ZERO = 'z'
 
-# We have to do it this way to avoid circular imports.
+# This is so that we don't get circular imports.
 from .parse_ops import parse_variable, parse_set_pointer, parse_constant, parse_loop, parse_block, parse_jump_if_zero
+from .stack_ops import add, sub, mul, div, print_stack, char_print, sqr, exp, swap, get_input, mod, bitwise_and, \
+    bitwise_or, bitwise_xor, bitwise_twos, bitwise_lshift, bitwise_rshift
+
 
 COMPLEX_TOKENS = {
     VARIABLE_START: parse_variable,
@@ -19,13 +22,18 @@ COMPLEX_TOKENS = {
     JUMP_IF_ZERO: parse_jump_if_zero,
 }
 
-# We have to do it this way to avoid circular imports.
-from .stack_ops import add, sub, mul, div, print_stack, char_print, sqr, exp, swap, get_input
 COMMANDS = {
     '+': add,
     '-': sub,
     '*': mul,
     '/': div,
+    '%': mod,
+    '&': bitwise_and,
+    '^': bitwise_xor,
+    '|': bitwise_or,
+    '~': bitwise_twos,
+    '<': bitwise_lshift,
+    '>': bitwise_rshift,
     'p': print_stack,
     'c': char_print,
     's': sqr,
