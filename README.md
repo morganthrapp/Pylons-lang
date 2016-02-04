@@ -5,6 +5,8 @@ Pretty basic stack based language. Mostly just doing this because I want to get 
 
 All commands operate on the top two elements of the stack unless otherwise specified.
 
+Variables and constants must be defined with capital letters.
+
 Supports the following things:
 
 1. Appending number to the stack `\d`.
@@ -16,4 +18,5 @@ Supports the following things:
 1. Printing the stack `p`.
 1. Printing the stack as a string `c`.
 1. Swap the top of the stack `\`
-1. Variables with `:name(value or block)`. Ex: `:A1`. Currently these all have to be declared at the start of the program and must be constant values.
+1. Constants with `:name(value or block)`. Ex: `:A1`. Currently these all have to be declared at the start of the program.
+1. Variables with `[name(value or block)]`. Ex: `[A12+] == [3]` or `[A|11|2+]A == [13]`

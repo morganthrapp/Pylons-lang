@@ -4,7 +4,9 @@ BLOCK_SEP = '|'
 LOOP_START = '{'
 LOOP_END = '}'
 POINTER_SET = ';'
-VARIABLE = '='
+CONSTANT_SEP = ':'
+VARIABLE_START = '['
+VARIABLE_END = ']'
 
 
 def add(_stack):
@@ -72,6 +74,7 @@ commands = {
     's': sqr,
     'e': exp,
     '\\': swap,
+    'i': input
 }
 
 
@@ -88,6 +91,50 @@ def parse_block(instruction_slice, _pointer=None):
         return instruction_slice[:block_end] or instruction_slice
 
 
+def parse_loop(instructions, stack, pointer):
+    start = pointer
+    while instructions[pointer] != LOOP_END:
+        pointer += 1
+    command = instructions[start:pointer]
+    command, loop = command.split(',')
+    if loop.startswith(BLOCK_SEP):
+        loop = parse_block(loop[1:])
+    for _ in range(int(loop)):
+        stack = parse(command, stack)
+    return stack, pointer
+
+
+def parse_constant(instructions, stack, pointer, global_vars):
+    variable_name = instructions[pointer]
+    pointer += 1
+    command = instructions[pointer]
+    if command == BLOCK_SEP:
+        value, pointer = parse_block(instructions[pointer:], pointer)
+    else:
+        value = command
+    global_vars[variable_name] = value
+    return parse(instructions[pointer+1:], stack, global_vars=global_vars)
+
+
+def set_pointer(instructions, stack, pointer, global_vars):
+    command = instructions[pointer]
+    if command == BLOCK_SEP:
+        new_pointer, pointer = parse_block(instructions[pointer+1:], pointer)
+    else:
+        new_pointer = command
+        pointer += 1
+    return parse(instructions[:instructions.find(POINTER_SET)] + instructions[pointer:], stack, int(new_pointer)-1, global_vars)
+
+
+def parse_variable(instructions, stack, pointer, global_vars):
+    variable_name = instructions[pointer]
+    pointer += 1
+    variable_end_location = instructions.find(VARIABLE_END)
+    value = parse(instructions[pointer:variable_end_location])
+    global_vars[variable_name] = '|{}|'.format(sum(value))
+    return parse(instructions[variable_end_location:], stack, global_vars=global_vars)
+
+
 def parse(instructions, stack=None, pointer=0, global_vars=None):
     if not stack:
         stack = []
@@ -98,41 +145,19 @@ def parse(instructions, stack=None, pointer=0, global_vars=None):
     while pointer < len(instructions):
         command = instructions[pointer]
         pointer += 1
+        if command == VARIABLE_START:
+            return parse_variable(instructions, stack, pointer, global_vars)
         if command == POINTER_SET:
-            command = instructions[pointer]
-            if command == BLOCK_SEP:
-                new_pointer, pointer = parse_block(instructions[pointer+1:], pointer)
-            else:
-                new_pointer = command
-                pointer += 1
-            return parse(instructions[:instructions.find(POINTER_SET)] + instructions[pointer:], stack, int(new_pointer)-1, global_vars)
-        if command == VARIABLE:
-            pointer += 1
-            variable_name = instructions[pointer]
-            pointer += 1
-            command = instructions[pointer]
-            if command == BLOCK_SEP:
-                value, pointer = parse_block(instructions[pointer:], pointer)
-            else:
-                value = command
-                pointer += 1
-            global_vars = {variable_name: value}
-            return parse(instructions[pointer:], stack, pointer, global_vars)
+            return set_pointer(instructions, stack, pointer, global_vars)
+        if command == CONSTANT_SEP:
+            return parse_constant(instructions, stack, pointer, global_vars)
         if command == LOOP_START:
-            start = pointer
-            while instructions[pointer] != LOOP_END:
-                pointer += 1
-            command = instructions[start:pointer]
-            command, loop = command.split(',')
-            if loop.startswith(BLOCK_SEP):
-                loop = parse_block(loop[1:])
-            for _ in range(int(loop)):
-                stack = parse(command, stack)
+            stack, pointer = parse_loop(instructions, stack, pointer)
         if command == BLOCK_SEP:
             command, pointer = parse_block(instructions[pointer:], pointer)
         if command.isnumeric():
             stack.append(int(command))
-        elif command in commands:
+        if command in commands:
             stack = commands[command](stack)
 
     return stack
@@ -151,3 +176,5 @@ assert parse('4s') == [2]
 assert parse('22e') == [4]
 assert parse('12\\') == [2, 1]
 assert parse(':A1A2+') == [3]
+assert parse('[A12+]A2A+') == [3, 5]
+assert parse('[A|11|2+]A') == [13]
