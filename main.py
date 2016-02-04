@@ -1,10 +1,12 @@
 from interpreter.constants import COMPLEX_TOKENS, COMMANDS, FUNCTION_ARG, STRING_MODE
-from interpreter.types import Block, Loop, Variable, PointerSetter, JumpZero, Function
+from interpreter.types import Block, ForLoop, Variable, PointerSetter, JumpZero, Function, WhileLoop
 
 
 def run(instructions, stack=None, pointer=0, global_vars=None, functions=None):
     if not stack:
         stack = []
+    else:
+        stack = stack[:]
     if not global_vars:
         global_vars = {}
     if not functions:
@@ -33,13 +35,16 @@ def run(instructions, stack=None, pointer=0, global_vars=None, functions=None):
             if stack[-1] == 0:
                 pointer += 2  # We skip the jump command and the next one.
                 continue
-        elif isinstance(token, Loop):
+        elif isinstance(token, ForLoop):
             if str(token.iterations).isnumeric():
                 iterations = int(token.iterations)
             else:
                 iterations = sum(run(token.iterations, global_vars=global_vars, functions=functions))
             for _ in range(iterations):
                 stack = run(token.command, stack=stack, global_vars=global_vars, functions=functions)
+        elif isinstance(token, WhileLoop):
+            while run(token.condition, stack, global_vars=global_vars, functions=functions):
+                stack = run(token.command, stack, global_vars=global_vars, functions=functions)
         elif token.isnumeric():
             stack.append(int(token))
         elif token in COMMANDS:

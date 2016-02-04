@@ -3,7 +3,7 @@ class Block:
         self.val = int(val)
 
 
-class Loop:
+class ForLoop:
     def __init__(self, command, iterations):
         self.command = command
         self.iterations = iterations
@@ -28,3 +28,9 @@ class Function:
     def __init__(self, name, command):
         self.name = name
         self.command = command
+
+
+class WhileLoop:
+    def __init__(self, command, condition):
+        self.command = command
+        self.condition = condition

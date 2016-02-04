@@ -1,5 +1,5 @@
 from .constants import BLOCK_SEP, LOOP_END, VARIABLE_END, FUNCTION_END
-from .types import Block, Loop, Variable, PointerSetter, JumpZero, Function
+from .types import Block, ForLoop, Variable, PointerSetter, JumpZero, Function, WhileLoop
 
 
 def parse_block(instructions, pointer=0):
@@ -15,14 +15,14 @@ def parse_loop(instructions, pointer):
     start = pointer
     while instructions[pointer] != LOOP_END:
         pointer += 1
-    command = instructions[start+1:pointer]
+    command = instructions[start + 1:pointer]
     command, loop_count = command.split(',')
-    if loop_count.startswith(BLOCK_SEP):
+    if BLOCK_SEP in loop_count:
         block_pointer, block = parse_block(loop_count)
         loop_count = block.val
         pointer += block_pointer
     pointer += 1  # To ignore the end of the loop block.
-    return pointer, Loop(command, loop_count)
+    return pointer, ForLoop(command, loop_count)
 
 
 def parse_constant(instructions, pointer):
@@ -78,3 +78,17 @@ def parse_function(instructions, pointer):
     command = instructions[pointer:function_end_location]
     pointer += len(command) + 1  # Set the pointer to after the function block.
     return pointer, Function(function_name, command)
+
+
+def parse_while_loop(instructions, pointer):
+    start = pointer
+    while instructions[pointer] != LOOP_END:
+        pointer += 1
+    command = instructions[start + 1:pointer]
+    command, loop_condition = command.split(',')
+    if BLOCK_SEP in loop_condition:
+        block_start = loop_condition.find(BLOCK_SEP)
+        block_pointer, block = parse_block(loop_condition, block_start)
+        loop_condition = loop_condition[:block_start] + block.val + loop_condition[block_pointer:]
+    pointer += 1  # To skip the end of the loop block.
+    return pointer, WhileLoop(command, loop_condition)

@@ -169,3 +169,7 @@ def get_bottom(_stack):
 def duplicate(_stack):
     _stack.append(_stack[-1])
     return _stack
+
+
+def greater_than(_stack):
+    return _stack[-1] > _stack[-2]

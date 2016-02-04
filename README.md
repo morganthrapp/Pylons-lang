@@ -32,3 +32,5 @@ Supports the following things:
 1. Pop and discard the top of the stack with `,`.
 1. Get the top/bottom of the stack with `t` and `b` respectively. Sets the stack/variable to the top/bottom of the stack.
 1. Duplicate the top of the stack with `d`.
+1. Check if `_stack[-1] > _stack[-2]` with `g`. This overwrites the stack, so it should only be used for a variable or a while loop.
+1. While loop with `w(command),(condition}`. Ex. `1w1+,5g} == [5]`
