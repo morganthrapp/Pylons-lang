@@ -160,6 +160,7 @@ def parse(instructions, stack=None, pointer=0, global_vars=None):
         if command in commands:
             stack = commands[command](stack)
 
+    print(stack)
     return stack
 
 

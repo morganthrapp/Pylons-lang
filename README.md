@@ -7,6 +7,8 @@ All commands operate on the top two elements of the stack unless otherwise speci
 
 Variables and constants must be defined with capital letters.
 
+Implicitly prints the stack at the end of the instruction set.
+
 Supports the following things:
 
 1. Appending number to the stack `\d`.
