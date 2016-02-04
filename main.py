@@ -31,6 +31,7 @@ def run(instructions, stack=None, pointer=0, global_vars=None, functions=None):
             functions[token.name] = token.command
         elif isinstance(token, JumpZero):
             if stack[-1] == 0:
+                pointer += 2  # We skip the jump command and the next one.
                 continue
         elif isinstance(token, Loop):
             if str(token.iterations).isnumeric():
