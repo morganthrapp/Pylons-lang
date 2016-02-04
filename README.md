@@ -21,5 +21,6 @@ Supports the following things:
 1. Printing the stack as a string `c`.
 1. Swap the top of the stack `\`
 1. Constants with `:name(value or block)`. Ex: `:A1`. Currently these all have to be declared at the start of the program.
-1. Variables with `[name(value or block)]`. Ex: `[A12+] == [3]` or `[A|11|2+]A == [13]`
+1. Variables with `[name(value or block)]`. Ex: `[A12+] == [3]` or `[A|11|2+]A == [13]`. Variables can only be an integer, not complex types for now.
 1. Taking command line input with `i`.
+1. Set the stack pointer to a specific location `;(value or block)`. Zero indexed.

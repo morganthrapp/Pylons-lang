@@ -58,7 +58,7 @@ def swap(_stack):
 
 
 def print_stack(_stack):
-    print(_stack)
+    print([x for x in _stack if x is not None])
     return _stack
 
 
