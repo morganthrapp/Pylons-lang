@@ -15,7 +15,7 @@ assert run(':A1A2+') == [3]
 assert run('[A12+]A2A+') == [3, 5]
 assert run('[A#11#2+]A') == [13]
 assert run('23p') == [2, 3]  # Should also print [2, 3]
-assert run('2i+') == [2, 2, 72, 101, 108, 219]  # This takes input of 2, Hello
+assert run('2i+') == [2, 2, 72, 101, 108, 108, 111, 32, 87, 111, 114, 208]  # This takes input of 2, "Hello World"
 assert run('34%') == [1]
 assert run('32&') == [2]
 assert run('82^') == [10]
