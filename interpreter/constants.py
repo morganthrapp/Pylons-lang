@@ -1,4 +1,4 @@
-BLOCK_SEP = '|'
+BLOCK_SEP = '#'
 LOOP_START = '{'
 LOOP_END = '}'
 POINTER_SET = ';'
@@ -9,6 +9,7 @@ JUMP_IF_ZERO = 'z'
 
 # We have to do it this way to avoid circular imports.
 from .parse_ops import parse_variable, parse_set_pointer, parse_constant, parse_loop, parse_block, parse_jump_if_zero
+
 COMPLEX_TOKENS = {
     VARIABLE_START: parse_variable,
     POINTER_SET: parse_set_pointer,
