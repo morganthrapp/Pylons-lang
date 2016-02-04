@@ -59,3 +59,7 @@ def tokenize(instructions):
             pointer += 1  # If we find a command we don't recognize, just skip it.
 
     return tokens
+
+
+if __name__ == '__main__':
+    print(run(input()))
