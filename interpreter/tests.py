@@ -1,4 +1,4 @@
-from main import run, tokenize
+from main import run
 
 assert run('|25|2+7*') == [189]
 assert run('48*') == [4 * 8]
