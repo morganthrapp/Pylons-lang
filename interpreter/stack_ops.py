@@ -74,7 +74,11 @@ def print_stack(_stack):
 
 def get_input(_stack):
     for arg in sys.argv[1:]:
-        _stack.append(int(arg))
+        if arg.isnumeric():
+            _stack.append(int(arg))
+        else:
+            for char in arg:
+                _stack.append(ord(char))
     return _stack
 
 
