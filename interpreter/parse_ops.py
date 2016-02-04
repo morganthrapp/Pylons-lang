@@ -57,10 +57,13 @@ def parse_variable(instructions, pointer):
     name = instructions[pointer]
     pointer += 1  # Skip over the name.
     variable_end_location = instructions.find(VARIABLE_END)
-    commands = instructions[pointer:variable_end_location]
-    value = run(commands)
-    pointer += len(commands) + 1  # Set the pointer to after the initialization block.
-    return pointer, Variable(name, sum(value))
+    command = instructions[pointer:variable_end_location]
+    if command.isnumeric():
+        value = sum(run(command))
+    else:
+        value = command
+    pointer += len(command) + 1  # Set the pointer to after the initialization block.
+    return pointer, Variable(name, value)
 
 
 def parse_jump_if_zero(instructions, pointer):

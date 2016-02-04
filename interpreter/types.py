@@ -12,7 +12,7 @@ class Loop:
 class Variable:
     def __init__(self, name, val):
         self.name = name
-        self.val = int(val)
+        self.val = val
 
 
 class PointerSetter:

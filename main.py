@@ -19,7 +19,10 @@ def run(instructions, stack=None, pointer=0, global_vars=None, functions=None):
         elif isinstance(token, Block):
             stack.append(token.val)
         elif isinstance(token, Variable):
-            global_vars[token.name] = token.val
+            if isinstance(token.val, str):
+                global_vars[token.name] = sum(run(token.val, stack=stack, functions=functions, global_vars=global_vars))
+            else:
+                global_vars[token.name] = int(token.val)
         elif isinstance(token, PointerSetter):
             tokens[pointer] = None
             pointer = token.location
