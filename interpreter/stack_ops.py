@@ -155,7 +155,7 @@ def clear_stack(_stack):
 
 
 def pop_stack(_stack):
-    return [_stack[:-1]]
+    return _stack[:-1]
 
 
 def get_top(_stack):
@@ -164,3 +164,8 @@ def get_top(_stack):
 
 def get_bottom(_stack):
     return [_stack[0]]
+
+
+def duplicate(_stack):
+    _stack.append(_stack[-1])
+    return _stack

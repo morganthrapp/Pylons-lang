@@ -16,7 +16,7 @@ from .parse_ops import parse_variable, parse_set_pointer, parse_constant, parse_
     parse_function
 from .stack_ops import add, sub, mul, div, print_stack, char_print, sqr, exp, swap, get_input, mod, bitwise_and, \
     bitwise_or, bitwise_xor, bitwise_twos, bitwise_lshift, bitwise_rshift, stack_len, stack_sum, clear_stack, \
-    pop_stack, get_top, get_bottom
+    pop_stack, get_top, get_bottom, duplicate
 
 COMPLEX_TOKENS = {
     VARIABLE_START: parse_variable,
@@ -52,4 +52,5 @@ COMMANDS = {
     ',': pop_stack,
     't': get_top,
     'b': get_bottom,
+    'd': duplicate,
 }

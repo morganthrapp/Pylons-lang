@@ -29,5 +29,6 @@ Supports the following things:
 1. Sum the stack with `s`. Sets the stack equal to the sum of the stack.
 1. Append the length of the stack with `l`. Sets the stack equal to the length of the stack before this command.
 1. Clear the stack with `x`.
-1. Discard the top of the stack with `,`.
+1. Pop and discard the top of the stack with `,`.
 1. Get the top/bottom of the stack with `t` and `b` respectively. Sets the stack/variable to the top/bottom of the stack.
+1. Duplicate the top of the stack with `d`.
