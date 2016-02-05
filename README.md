@@ -25,7 +25,7 @@ Implicitly prints the stack at the end of the instruction set.
 # Supports the following operations:
 
 1. Appending number to the stack `\d`.
-1. Blocks `#\d+#`.
+1. Numerical blocks `#\d+#`. This pushes the number between the `#` sign to the stack. 
 1. Basic arithmetic `+-/*%`.
 1. Bitwise operators `<>|&^~`. Left shift, right shift, or, and, xor, twos compliment. Twos compliment only affects the top of the stack. 
 1. For loops `{command,count}`. This works with an integer or a block for count.
