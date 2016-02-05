@@ -62,7 +62,7 @@ def parse_variable(instructions, pointer):
         value = sum(run(command))
     else:
         value = command
-    pointer += variable_end_location + 1 # Set the pointer to after the initialization block.
+    pointer += variable_end_location - 1 # Set the pointer to after the initialization block.
     return pointer, Variable(name, value)
 
 

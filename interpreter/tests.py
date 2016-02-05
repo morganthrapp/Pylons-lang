@@ -44,3 +44,4 @@ assert run('5m')
 assert run('1111223o') == [1, 4, 2, 2, 3, 1]
 assert run('1234j') == [1, 2, 3, 4]
 assert run('3!') == [6]
+assert run('1(234)-s') == [6]
