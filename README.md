@@ -41,3 +41,5 @@ Supports the following things:
 1. Factorial of the top of the stack with `!`. 
 1. Count the items in the stack with `o`. Sets the stack equal to `[element, count...]` for each element in the stack.
 1. Join and print the stack with `j`.
+1. Create a list with '({values})'. Any operation done on a list is done matrix wise. Ex. `1(234)-s == [6]`.
+ 
