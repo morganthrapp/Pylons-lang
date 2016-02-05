@@ -99,4 +99,5 @@ def tokenize(instructions):
 
 
 if __name__ == '__main__':
-    print(run('1(i)-s'))
+    #print(run('1(i)-s'))
+    print(run(input()))
