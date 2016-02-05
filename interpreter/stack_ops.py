@@ -210,7 +210,7 @@ def join_print(_stack):
     return _stack
 
 
-def factoral(_stack):
+def factorial(_stack):
     new_val = math.factorial(_stack[-1])
     _stack[-1] = new_val
     return _stack
