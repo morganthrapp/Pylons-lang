@@ -45,7 +45,7 @@ def char_print(_stack, upper=False):
         print(''.join(chr(x) for x in _stack).upper())
     else:
         print(''.join(chr(x) for x in _stack))
-    return _stack
+    exit()
 
 
 def sqr(_stack):
@@ -77,7 +77,7 @@ def is_prime(_stack):
 
 
 def get_input(_stack):
-    for arg in sys.argv[1:]:
+    for arg in sys.argv:
         if arg.isnumeric():
             _stack.append(int(arg))
         else:
@@ -217,7 +217,7 @@ def count(_stack):
 
 def join_print(_stack):
     print(''.join(map(str, _stack)))
-    return _stack
+    exit()
 
 
 def factorial(_stack):

@@ -99,4 +99,7 @@ def tokenize(instructions):
 
 
 if __name__ == '__main__':
-    print(run(input()))
+    import sys
+    program = sys.argv[1]
+    sys.argv = sys.argv[2:]
+    print(run(program))

@@ -20,7 +20,7 @@ Supports the following things:
 1. Exponential multiplication `e`. 
 1. Print the stack with `p`.
 1. Check the primality of the top of the stack `m`.
-1. Printing the stack as a string `c`.
+1. Printing the stack as a string `c`. Exits after printing.
 1. Swap the top of the stack `\`
 1. Constants with `:name(value or block)`. Ex: `:A1`. Currently these all have to be declared at the start of the program.
 1. Variables with `[name(value or block)]`. Ex: `[A12+] == [3]` or `[A#11#2+]A == [13]`. Variables can only be an integer, not complex types for now.
@@ -40,7 +40,7 @@ Supports the following things:
 1. Get all possible permutations of the stack with `m`. This returns a list of tuples, so caution should be used. It's also not very efficient.
 1. Factorial of the top of the stack with `!`. 
 1. Count the items in the stack with `o`. Sets the stack equal to `[count, element...]` for each element in the stack.
-1. Join and print the stack with `j`.
+1. Join and print the stack with `j`. Exits after printing.
 1. Create a list with `({values})`. Any operation done on a list is done matrix wise. Ex. `1(234)-s == [6]`.
 1. Quit without printing the stack with `@`
 1. Push the top of the stack to a list with `h`. Ex, `:A()A1h == [List(1)]` 
