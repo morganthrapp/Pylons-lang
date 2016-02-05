@@ -39,7 +39,8 @@ Supports the following things:
 1. Reverse the stack with `v`.
 1. Get all possible permutations of the stack with `m`. This returns a list of tuples, so caution should be used. It's also not very efficient.
 1. Factorial of the top of the stack with `!`. 
-1. Count the items in the stack with `o`. Sets the stack equal to `[element, count...]` for each element in the stack.
+1. Count the items in the stack with `o`. Sets the stack equal to `[count, element...]` for each element in the stack.
 1. Join and print the stack with `j`.
 1. Create a list with `({values})`. Any operation done on a list is done matrix wise. Ex. `1(234)-s == [6]`.
+1. Quit without printing the stack with `@`
  

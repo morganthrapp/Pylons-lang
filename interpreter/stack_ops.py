@@ -1,6 +1,7 @@
 import itertools
 import math
 import sys
+from .cust_types import List
 
 
 def add(_stack):
@@ -163,11 +164,19 @@ def pop_stack(_stack):
 
 
 def get_top(_stack):
-    return [_stack[-1]]
+    val = _stack[-1]
+    if isinstance(val, List):
+        return [val.val[-1]]
+    else:
+        return [val]
 
 
 def get_bottom(_stack):
-    return [_stack[0]]
+    val = _stack[0]
+    if isinstance(val, List):
+        return [val.val[0]]
+    else:
+        return [val]
 
 
 def duplicate(_stack):
@@ -201,8 +210,8 @@ def count(_stack):
     stack = sort(_stack)
     _stack = []
     for x in set(stack):
-        _stack.append(x)
         _stack.append(stack.count(x))
+        _stack.append(x)
     return _stack
 
 
@@ -215,3 +224,26 @@ def factorial(_stack):
     new_val = math.factorial(_stack[-1])
     _stack[-1] = new_val
     return _stack
+
+
+def run_length_encoding(_stack):
+    input_string = ''.join(map(str,_stack))
+    count = 1
+    prev = ''
+    lst = []
+    for character in input_string:
+        if character != prev:
+            if prev:
+                lst += [count, int(prev)]
+                # print lst
+            count = 1
+            prev = character
+        else:
+            count += 1
+    else:
+        lst += [count, int(character)]
+    return lst
+
+
+def no_print(_stack):
+    exit()
