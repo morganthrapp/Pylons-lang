@@ -9,7 +9,15 @@ Variables and constants must be defined with capital letters.
 
 Implicitly prints the stack at the end of the instruction set.
 
-Supports the following things:
+# Some examples.
+
+    "Hello, World!"c  # Hello world.
+    0{d1+,i}c         # Print the ascii table (0,sys.argv[0]]
+    i:At,{n,A}j@      # [Look and Say](https://oeis.org/A005150)
+    11fA..+@{A,i}     # First sys.argv[0] Fibonacci numbers
+
+
+# Supports the following operations:
 
 1. Appending number to the stack `\d`.
 1. Blocks `#\d+#`.
