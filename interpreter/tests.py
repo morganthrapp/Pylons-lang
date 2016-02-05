@@ -39,3 +39,7 @@ assert run('12b') == [1]
 assert run('1d') == [1, 1]
 assert run('11-z2') == [0]
 assert run('1w1+,5g}') == [5]
+assert run('3542`') == [2, 3, 4, 5]
+assert run('123v') == [3, 2, 1]
+assert run('123m') == [(0, 1, 2), (0, 2, 1), (1, 0, 2), (1, 2, 0), (2, 0, 1), (2, 1, 0)]
+assert run('5p')
