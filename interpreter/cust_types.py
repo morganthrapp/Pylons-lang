@@ -41,7 +41,10 @@ class List:
         self.val = val
 
     def __add__(self, other):
-        return List([x + other for x in self.val])
+        if isinstance(other, List):
+            return List([x + sum(other.val) for x in self.val])
+        else:
+            return List([x + other for x in self.val])
 
     def __sub__(self, other):
         return List([x - other for x in self.val])
