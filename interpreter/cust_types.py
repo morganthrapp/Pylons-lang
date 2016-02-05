@@ -80,7 +80,7 @@ class List:
         return List([x >> other for x in self.val])
 
     def __int__(self):
-        return self.val
+        return int(sum(self.val))
 
     def __len__(self):
         return len(self.val)
