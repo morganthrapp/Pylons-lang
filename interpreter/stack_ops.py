@@ -1,5 +1,6 @@
 import math
 import sys
+import itertools
 
 
 def add(_stack):
@@ -179,3 +180,17 @@ def greater_than(_stack):
 
 def sort(_stack):
     return list(sorted(_stack))
+
+
+def reverse(_stack):
+    return list(reversed(_stack))
+
+
+def permutations(_stack):
+    perms = list(itertools.permutations(_stack))
+    return perms
+
+
+def print_stack(_stack):
+    print([x for x in _stack if x is not None])
+    return _stack

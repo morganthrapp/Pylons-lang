@@ -1,5 +1,5 @@
 from .constants import BLOCK_SEP, LOOP_END, VARIABLE_END, FUNCTION_END
-from .types import Block, ForLoop, Variable, PointerSetter, JumpZero, Function, WhileLoop
+from .cust_types import Block, ForLoop, Variable, PointerSetter, JumpZero, Function, WhileLoop
 
 
 def parse_block(instructions, pointer=0):

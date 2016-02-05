@@ -17,7 +17,7 @@ from .parse_ops import parse_variable, parse_set_pointer, parse_constant, parse_
     parse_function, parse_while_loop
 from .stack_ops import add, sub, mul, div, is_prime, char_print, sqr, exp, swap, get_input, mod, bitwise_and, \
     bitwise_or, bitwise_xor, bitwise_twos, bitwise_lshift, bitwise_rshift, stack_len, stack_sum, clear_stack, \
-    pop_stack, get_top, get_bottom, duplicate, greater_than, sort
+    pop_stack, get_top, get_bottom, duplicate, greater_than, sort, reverse, permutations, print_stack
 
 COMPLEX_TOKENS = {
     VARIABLE_START: parse_variable,
@@ -42,7 +42,7 @@ COMMANDS = {
     '~': bitwise_twos,
     '<': bitwise_lshift,
     '>': bitwise_rshift,
-    'p': is_prime,
+    'p': print_stack,
     'c': char_print,
     'q': sqr,
     'e': exp,
@@ -57,4 +57,7 @@ COMMANDS = {
     'd': duplicate,
     'g': greater_than,
     '`': sort,
+    'v': reverse,
+    'u': permutations,
+    'm': is_prime
 }

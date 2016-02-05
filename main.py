@@ -1,12 +1,16 @@
 from interpreter.constants import COMPLEX_TOKENS, COMMANDS, FUNCTION_ARG, STRING_MODE
-from interpreter.types import Block, ForLoop, Variable, PointerSetter, JumpZero, Function, WhileLoop
+from interpreter.cust_types import Block, ForLoop, Variable, PointerSetter, JumpZero, Function, WhileLoop
+import copy
 
 
 def run(instructions, stack=None, pointer=0, global_vars=None, functions=None):
     if not stack:
         stack = []
     else:
-        stack = stack[:]
+        try:
+            stack = copy.copy(stack)
+        except AttributeError:
+            print(stack)
     if not global_vars:
         global_vars = {}
     if not functions:
@@ -93,5 +97,4 @@ def tokenize(instructions):
 
 
 if __name__ == '__main__':
-    #print(run(input()))
-    print(run('1w1+p,1}'))
+    print(run(input()))
