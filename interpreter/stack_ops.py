@@ -1,6 +1,7 @@
 import math
 import sys
 import itertools
+from .cust_types import List
 
 
 def add(_stack):
@@ -146,7 +147,13 @@ def bitwise_rshift(_stack):
 
 
 def stack_sum(_stack):
-    return [sum(_stack)]
+    total = 0
+    for x in _stack:
+        if isinstance(x, List):
+            total += sum(x.val)
+        else:
+            total += x
+    return [total]
 
 
 def stack_len(_stack):

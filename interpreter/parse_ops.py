@@ -1,5 +1,5 @@
 from .constants import BLOCK_SEP, LOOP_END, VARIABLE_END, FUNCTION_END
-from .cust_types import Block, ForLoop, Variable, PointerSetter, JumpZero, Function, WhileLoop
+from .cust_types import Block, ForLoop, Variable, PointerSetter, JumpZero, Function, WhileLoop, List
 
 
 def parse_block(instructions, pointer=0):
@@ -7,7 +7,7 @@ def parse_block(instructions, pointer=0):
     instructions = instructions[pointer:]
     block_end = instructions.find(BLOCK_SEP)
     value = instructions[:block_end]
-    pointer += block_end + 1  # The 2 accounts for the block start.
+    pointer += block_end + 1
     return pointer, Block(value)
 
 
@@ -62,7 +62,7 @@ def parse_variable(instructions, pointer):
         value = sum(run(command))
     else:
         value = command
-    pointer += len(command) + 1  # Set the pointer to after the initialization block.
+    pointer += variable_end_location + 1 # Set the pointer to after the initialization block.
     return pointer, Variable(name, value)
 
 
@@ -92,3 +92,13 @@ def parse_while_loop(instructions, pointer):
         loop_condition = loop_condition[:block_start] + block.val + loop_condition[block_pointer:]
     pointer += 1  # To skip the end of the loop block.
     return pointer, WhileLoop(command, loop_condition)
+
+
+def parse_list(instructions, pointer):
+    from main import run  # We have to do it this way to avoid circular imports.
+    pointer += 1
+    list_end = instructions.find(')')
+    list_body = instructions[pointer:list_end]
+    pointer += len(list_body) + 1
+    list_val = run(list_body)
+    return pointer, List(list_val)

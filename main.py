@@ -1,5 +1,5 @@
 from interpreter.constants import COMPLEX_TOKENS, COMMANDS, FUNCTION_ARG, STRING_MODE
-from interpreter.cust_types import Block, ForLoop, Variable, PointerSetter, JumpZero, Function, WhileLoop
+from interpreter.cust_types import Block, ForLoop, Variable, PointerSetter, JumpZero, Function, WhileLoop, List
 import copy
 
 
@@ -49,6 +49,8 @@ def run(instructions, stack=None, pointer=0, global_vars=None, functions=None):
         elif isinstance(token, WhileLoop):
             while run(token.condition, stack, global_vars=global_vars, functions=functions):
                 stack = run(token.command, stack, global_vars=global_vars, functions=functions)
+        elif isinstance(token, List):
+            stack.append(token)
         elif token.isnumeric():
             stack.append(int(token))
         elif token in COMMANDS:
@@ -97,4 +99,4 @@ def tokenize(instructions):
 
 
 if __name__ == '__main__':
-    print(run(input()))
+    print(run('1(i)-s'))
