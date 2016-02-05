@@ -1,5 +1,7 @@
 from main import run
-from interpreter.cust_types import List
+import sys
+
+sys.argv = sys.argv[1:]
 
 assert run('#25#2+7*') == [189]
 assert run('26/') == [3]
@@ -48,3 +50,4 @@ assert run('3!') == [6]
 assert run('1(234)-s') == [6]
 assert run('(234)1-2hs') == [8]
 assert run(':A()A1h') == [[1]]
+assert run('(123)(12)+') == [[4, 5, 6]]
