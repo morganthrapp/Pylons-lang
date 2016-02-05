@@ -194,3 +194,23 @@ def permutations(_stack):
 def print_stack(_stack):
     print([x for x in _stack if x is not None])
     return _stack
+
+
+def count(_stack):
+    stack = sort(_stack)
+    _stack = []
+    for x in set(stack):
+        _stack.append(x)
+        _stack.append(stack.count(x))
+    return _stack
+
+
+def join_print(_stack):
+    print(''.join(map(str, _stack)))
+    return _stack
+
+
+def factoral(_stack):
+    new_val = math.factorial(_stack[-1])
+    _stack[-1] = new_val
+    return _stack
