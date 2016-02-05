@@ -56,13 +56,13 @@ def parse_variable(instructions, pointer):
     pointer += 1  # Skip the initializer.
     name = instructions[pointer]
     pointer += 1  # Skip over the name.
-    variable_end_location = instructions.find(VARIABLE_END)
+    variable_end_location = instructions[pointer:].find(VARIABLE_END) + pointer
     command = instructions[pointer:variable_end_location]
     if command.isnumeric():
         value = sum(run(command))
     else:
         value = command
-    pointer += variable_end_location - 1 # Set the pointer to after the initialization block.
+    pointer = variable_end_location - 1 # Set the pointer to after the initialization block.
     return pointer, Variable(name, value)
 
 
@@ -97,7 +97,7 @@ def parse_while_loop(instructions, pointer):
 def parse_list(instructions, pointer):
     from main import run  # We have to do it this way to avoid circular imports.
     pointer += 1
-    list_end = instructions.find(')')
+    list_end = instructions[pointer:].find(')') + pointer
     list_body = instructions[pointer:list_end]
     pointer += len(list_body) + 1
     list_val = run(list_body)
