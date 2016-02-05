@@ -99,3 +99,6 @@ class List:
 
     def __rsub__(self, other):
         return self.__sub__(other)
+
+    def __eq__(self, other):
+        return self.val == other

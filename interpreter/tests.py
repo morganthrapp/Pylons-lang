@@ -1,4 +1,5 @@
 from main import run
+from interpreter.cust_types import List
 
 assert run('#25#2+7*') == [189]
 assert run('26/') == [3]
@@ -41,7 +42,9 @@ assert run('3542`') == [2, 3, 4, 5]
 assert run('123v') == [3, 2, 1]
 assert run('012u') == [(0, 1, 2), (0, 2, 1), (1, 0, 2), (1, 2, 0), (2, 0, 1), (2, 1, 0)]
 assert run('5m')
-assert run('1111223o') == [1, 4, 2, 2, 3, 1]
+assert run('1111223o') == [4, 1, 2, 2, 1, 3]
 assert run('1234j') == [1, 2, 3, 4]
 assert run('3!') == [6]
 assert run('1(234)-s') == [6]
+assert run('(234)1-2hs') == [8]
+assert run(':A()A1h') == [[1]]

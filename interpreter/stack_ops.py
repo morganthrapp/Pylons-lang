@@ -33,7 +33,7 @@ def mul(_stack):
 
 def div(_stack):
     if len(_stack) > 1:
-        new_val = _stack[-1] / _stack[-2]
+        new_val = _stack[-1] // _stack[-2]
         _stack[-2] = new_val
         return _stack[:-1]
     else:
@@ -247,3 +247,11 @@ def run_length_encoding(_stack):
 
 def no_print(_stack):
     exit()
+
+
+def push(_stack):
+    val = _stack[-1]
+    lst = _stack[-2]
+    if isinstance(lst, List):
+        lst.val.append(val)
+    return _stack[:-1]
