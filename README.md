@@ -44,4 +44,5 @@ Supports the following things:
 1. Create a list with `({values})`. Any operation done on a list is done matrix wise. Ex. `1(234)-s == [6]`.
 1. Quit without printing the stack with `@`
 1. Push the top of the stack to a list with `h`. Ex, `:A()A1h == [List(1)]` 
+1. Get the first `stack[-1]` digits of pi. If the stack is empty, returns the first 100.
  

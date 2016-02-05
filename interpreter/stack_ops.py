@@ -255,3 +255,18 @@ def push(_stack):
     if isinstance(lst, List):
         lst.val.append(val)
     return _stack[:-1]
+
+
+def this_isnt_golf_script(_stack):
+    print("This isn't golf script! Good try though.")
+    return _stack
+
+
+def pi(_stack):
+    if len(_stack) > 1:
+        digits = _stack[-1]
+    else:
+        digits = 100
+    pi_val = str(math.pi)[:digits + 1].replace('.', '')
+    _stack += list(map(int, pi_val))
+    return
