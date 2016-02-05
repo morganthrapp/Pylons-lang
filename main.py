@@ -93,4 +93,5 @@ def tokenize(instructions):
 
 
 if __name__ == '__main__':
-    print(run(input()))
+    #print(run(input()))
+    print(run('1w1+p,1}'))

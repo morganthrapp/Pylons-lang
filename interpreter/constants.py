@@ -15,9 +15,9 @@ STRING_MODE = '"'
 # This is so that we don't get circular imports.
 from .parse_ops import parse_variable, parse_set_pointer, parse_constant, parse_loop, parse_block, parse_jump_if_zero, \
     parse_function, parse_while_loop
-from .stack_ops import add, sub, mul, div, print_stack, char_print, sqr, exp, swap, get_input, mod, bitwise_and, \
+from .stack_ops import add, sub, mul, div, is_prime, char_print, sqr, exp, swap, get_input, mod, bitwise_and, \
     bitwise_or, bitwise_xor, bitwise_twos, bitwise_lshift, bitwise_rshift, stack_len, stack_sum, clear_stack, \
-    pop_stack, get_top, get_bottom, duplicate, greater_than
+    pop_stack, get_top, get_bottom, duplicate, greater_than, sort
 
 COMPLEX_TOKENS = {
     VARIABLE_START: parse_variable,
@@ -42,7 +42,7 @@ COMMANDS = {
     '~': bitwise_twos,
     '<': bitwise_lshift,
     '>': bitwise_rshift,
-    'p': print_stack,
+    'p': is_prime,
     'c': char_print,
     'q': sqr,
     'e': exp,
@@ -56,4 +56,5 @@ COMMANDS = {
     'b': get_bottom,
     'd': duplicate,
     'g': greater_than,
+    '`': sort,
 }

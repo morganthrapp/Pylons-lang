@@ -67,9 +67,11 @@ def swap(_stack):
         return _stack
 
 
-def print_stack(_stack):
-    print([x for x in _stack if x is not None])
-    return _stack
+def is_prime(_stack):
+    n = _stack[-1]
+    if n % 2 == 0 and n > 2:
+        return False
+    return all(n % i for i in range(3, int(math.sqrt(n)) + 1, 2))
 
 
 def get_input(_stack):
@@ -173,3 +175,7 @@ def duplicate(_stack):
 
 def greater_than(_stack):
     return _stack[-1] > _stack[-2]
+
+
+def sort(_stack):
+    return list(sorted(_stack))

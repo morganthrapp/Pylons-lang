@@ -18,7 +18,7 @@ Supports the following things:
 1. For loops `{command,count}`. This works with an integer or a block for count.
 1. Square root `s`. Sets the top of the stack equal to the square root of the previous top of stack. Ex. `4s == [2]`
 1. Exponential multiplication `e`. 
-1. Printing the stack `p`.
+1. Check the primality of the top of the stack `p`.
 1. Printing the stack as a string `c`.
 1. Swap the top of the stack `\`
 1. Constants with `:name(value or block)`. Ex: `:A1`. Currently these all have to be declared at the start of the program.
@@ -34,3 +34,4 @@ Supports the following things:
 1. Duplicate the top of the stack with `d`.
 1. Check if `_stack[-1] > _stack[-2]` with `g`. This overwrites the stack, so it should only be used for a variable or a while loop.
 1. While loop with `w(command),(condition}`. Ex. `1w1+,5g} == [5]`
+1. Sort the stack with <code>`</code>.
