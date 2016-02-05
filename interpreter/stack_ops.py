@@ -81,8 +81,7 @@ def get_input(_stack):
         if arg.isnumeric():
             _stack.append(int(arg))
         else:
-            for char in arg:
-                _stack.append(ord(char))
+            _stack += map(ord, arg)
     return _stack
 
 
