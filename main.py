@@ -100,6 +100,8 @@ def tokenize(instructions):
 
 if __name__ == '__main__':
     import sys
-    program = sys.argv[1]
+    program_file = sys.argv[1]
     sys.argv = sys.argv[2:]
+    with open(program_file, 'rt') as instruction_file:
+        program = instruction_file.read()
     print(run(program))

@@ -9,6 +9,11 @@ Variables and constants must be defined with capital letters.
 
 Implicitly prints the stack at the end of the instruction set.
 
+# How to run.
+
+    `py -3 main.py program.p *args`
+    
+
 # Some examples.
 
     "Hello, World!"c  # Hello world.
