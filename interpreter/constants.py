@@ -69,9 +69,10 @@ COMMANDS = {
     'j': join_print,
     '!': factorial,
     'n': run_length_encoding,
-    '@': no_print,
     'h': push,
     '⛳': this_isnt_golf_script,
     'a': pi,
-    'k': random,
+    'r': random,
 }
+
+# Unused symbols [@, $, _, =, ?, k, y]

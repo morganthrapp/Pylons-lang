@@ -58,5 +58,5 @@ Implicitly prints the stack at the end of the instruction set.
 1. Quit without printing the stack with `@`
 1. Push the top of the stack to a list with `h`. Ex, `:A()A1h == [List(1)]` 
 1. Get the first `stack[-1]` digits of pi. If the stack is empty, returns the first 100.
-1. Append a random int to the top of the stack with `k`. If there is more than one value on the stack, it does `randint(_stack[-2], _stack[-1])`. If there's only one value on the stack it does `randint(0, _stack[-1])`. If the stack is empty it does `randint(0, sys.maxsize)`.
+1. Append a random int to the top of the stack with `r`. If there is more than one value on the stack, it does `randint(_stack[-2], _stack[-1])`. If there's only one value on the stack it does `randint(0, _stack[-1])`. If the stack is empty it does `randint(0, sys.maxsize)`.
  
