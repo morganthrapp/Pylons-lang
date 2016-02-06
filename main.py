@@ -26,7 +26,10 @@ def run(instructions, stack=None, pointer=0, global_vars=None, functions=None):
             stack.append(token.val)
         elif isinstance(token, Variable):
             if isinstance(token.val, str):
-                global_vars[token.name] = sum(run(token.val, stack=stack, functions=functions, global_vars=global_vars))
+                if any(x in global_vars for x in token.val):
+                    global_vars[token.name] = sum(run(token.val, functions=functions, global_vars=global_vars))
+                else:
+                    global_vars[token.name] = sum(run(token.val, stack=stack, functions=functions, global_vars=global_vars))
             else:
                 global_vars[token.name] = int(token.val)
         elif isinstance(token, PointerSetter):
