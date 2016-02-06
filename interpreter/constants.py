@@ -13,6 +13,7 @@ FUNCTION_ARG = '.'
 STRING_MODE = '"'
 LIST_START = '('
 LIST_END = ')'
+LOOP_SEP = ','
 
 # This is so that we don't get circular imports.
 from .parse_ops import parse_variable, parse_set_pointer, parse_constant, parse_loop, parse_block, parse_jump_if_zero, \

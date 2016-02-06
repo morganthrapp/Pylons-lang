@@ -1,4 +1,4 @@
-from .constants import BLOCK_SEP, LOOP_END, VARIABLE_END, FUNCTION_END
+from .constants import BLOCK_SEP, LOOP_END, VARIABLE_END, FUNCTION_END, LIST_END, LOOP_SEP
 from .cust_types import Block, ForLoop, Variable, PointerSetter, JumpZero, Function, WhileLoop, List
 
 
@@ -16,7 +16,7 @@ def parse_loop(instructions, pointer):
     while instructions[pointer] != LOOP_END:
         pointer += 1
     command = instructions[start + 1:pointer]
-    command, loop_count = command.split(',')
+    command, _, loop_count = command.rpartition(LOOP_SEP)
     if BLOCK_SEP in loop_count:
         block_pointer, block = parse_block(loop_count)
         loop_count = block.val
@@ -87,7 +87,7 @@ def parse_while_loop(instructions, pointer):
     while instructions[pointer] != LOOP_END:
         pointer += 1
     command = instructions[start + 1:pointer]
-    command, loop_condition = command.split(',')
+    command, _, loop_condition = command.rpartition(LOOP_SEP)
     if BLOCK_SEP in loop_condition:
         block_start = loop_condition.find(BLOCK_SEP)
         block_pointer, block = parse_block(loop_condition, block_start)
@@ -99,7 +99,7 @@ def parse_while_loop(instructions, pointer):
 def parse_list(instructions, pointer):
     from main import run  # We have to do it this way to avoid circular imports.
     pointer += 1
-    list_end = instructions[pointer:].find(')') + pointer
+    list_end = instructions[pointer:].find(LIST_END) + pointer
     list_body = instructions[pointer:list_end]
     pointer += len(list_body) + 1
     list_val = run(list_body)
