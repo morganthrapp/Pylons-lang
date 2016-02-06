@@ -20,6 +20,11 @@ Implicitly prints the stack at the end of the instruction set.
     0{d1+,i}c         # Print the ascii table (0,sys.argv[0]]
     i:At,{n,A}j@      # [Look and Say](https://oeis.org/A005150)
     11fA..+@{A,i}     # First sys.argv[0] Fibonacci numbers
+    
+
+# Bonus quine, all credit to [kms7047](https://github.com/kms70847)
+    
+    #272905715458918625954929791277018732980372648151923925534616453307621588598692438414443279763003025372409097795417741330602167388103514682342382282390274176094981540184583036198531713253138700693955928801808034338692982310398308250577863556014805403336841267395172018000805496670641969318196854690330530651#[S],#35#[L0][TS]w[LL1+][T#10#T/],0Tg}[C1L-]{#10#C#10#eS/%#48#+[C1C-],L}#35#[L0][TS]w[LL1+][T8T>],0Tg}[C0]{#256#C8*S>%[C1C+],L}c
 
 
 # Supports the following operations:
