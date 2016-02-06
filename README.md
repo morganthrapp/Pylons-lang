@@ -36,7 +36,7 @@ Implicitly prints the stack at the end of the instruction set.
 1. Printing the stack as a string `c`. Exits after printing.
 1. Swap the top of the stack `\`
 1. Constants with `:name(value or block)`. Ex: `:A1`. Currently these all have to be declared at the start of the program.
-1. Variables with `[name(value or block)]`. Ex: `[A12+] == [3]` or `[A#11#2+]A == [13]`. Variables can only be an integer, not complex types for now.
+1. Variables with `[name(value or block)]`. Ex: `[A12+] == [3]` or `[A#11#2+]A == [13]`. Variables can only be an integer, not complex types for now. If you declare a variable without a value, it will automatically take the value of the top of the stack.
 1. Taking command line input with `i`.
 1. Set the stack pointer to a specific location `;(value or block)`. Zero indexed.
 1. Functions with `f(name)(body)@`. Uses `.` for args that get replaced with the top of the stack left to right. Not super stable right now. Ex. `2fA2+@ == [4]` 

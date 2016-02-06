@@ -56,5 +56,6 @@ assert run('2[At],') == []
 assert run('2[At]') == [2]
 assert run('[C0]') == []
 assert run('[C00+]') == []
+assert run('2[C]C+') == [4]
 
 print('All tests passed!')

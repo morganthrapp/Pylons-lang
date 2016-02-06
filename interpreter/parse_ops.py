@@ -60,8 +60,10 @@ def parse_variable(instructions, pointer):
     command = instructions[pointer:variable_end_location]
     if command.isnumeric():
         value = sum(run(command))
-    else:
+    elif command.strip():
         value = command
+    else:
+        value = 't'
     pointer = variable_end_location + 1 # Set the pointer to after the initialization block.
     return pointer, Variable(name, value)
 
