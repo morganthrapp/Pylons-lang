@@ -54,5 +54,7 @@ assert run('(12)(123)+') == [[4, 5, 6]]
 assert run('(12)(123)*') == [[3, 6, 9]]
 assert run('2[At],') == []
 assert run('2[At]') == [2]
+assert run('[C0]') == []
+assert run('[C00+]') == []
 
 print('All tests passed!')
