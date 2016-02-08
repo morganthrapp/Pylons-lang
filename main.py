@@ -12,7 +12,7 @@ def run(instructions, stack=None, pointer=0, global_vars=None, functions=None):
         except AttributeError:
             print(stack)
     if not global_vars:
-        global_vars = {}
+        global_vars = {'A': -1, 'B': 10}
     if not functions:
         functions = {}
     tokens = tokenize(instructions)
@@ -37,6 +37,8 @@ def run(instructions, stack=None, pointer=0, global_vars=None, functions=None):
             pointer = token.location
             continue
         elif isinstance(token, Function):
+            if token.name in global_vars:
+                global_vars.pop(token.name)
             functions[token.name] = token.command
         elif isinstance(token, Jump):
             # Certain jump types require an empty stack, others need the current value of the stack
