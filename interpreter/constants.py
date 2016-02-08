@@ -18,7 +18,7 @@ LOOP_SEP = ','
 ELEMENT_ACCESS = '@'
 
 # This is so that we don't get circular imports.
-from .parse_ops import parse_variable, parse_move_element, parse_constant, parse_loop, parse_block, parse_jump_if_zero, \
+from .parse_ops import parse_variable, parse_move_element, parse_constant, parse_for_loop, parse_block, parse_jump_if_zero, \
     parse_function, parse_while_loop, parse_list, parse_if, parse_get_element
 from .stack_ops import add, sub, mul, div, is_prime, char_print, sqr, exp, swap, get_input, mod, bitwise_and, \
     bitwise_or, bitwise_xor, bitwise_twos, bitwise_lshift, bitwise_rshift, stack_len, stack_sum, clear_stack, \
@@ -29,7 +29,7 @@ COMPLEX_TOKENS = {
     VARIABLE_START: parse_variable,
     ELEMENT_MOVE: parse_move_element,
     CONSTANT_SEP: parse_constant,
-    LOOP_START: parse_loop,
+    LOOP_START: parse_for_loop,
     BLOCK_SEP: parse_block,
     JUMP_IF_ZERO: parse_jump_if_zero,
     FUNCTION_START: parse_function,
@@ -82,4 +82,4 @@ COMMANDS = {
     'k': push_range,
 }
 
-# Unused symbols [@, $, =]
+# Unused symbols [$, =]

@@ -1,5 +1,6 @@
 from interpreter.constants import COMPLEX_TOKENS, COMMANDS, FUNCTION_ARG, STRING_MODE
 from interpreter.cust_types import Block, ForLoop, Variable, ElementMover, Jump, Function, WhileLoop, List, ElementGetter
+from interpreter.stack_ops import is_int
 import copy
 
 
@@ -83,6 +84,7 @@ def tokenize(instructions):
     tokens = []
     pointer = 0
     string_mode = False
+    instructions = str(instructions)
     while pointer < len(instructions):
         token = instructions[pointer]
         if token == STRING_MODE:
@@ -97,7 +99,7 @@ def tokenize(instructions):
         elif token in COMMANDS:
             tokens.append(token)
             pointer += 1
-        elif token.isnumeric():
+        elif is_int(token):
             tokens.append(token)
             pointer += 1
         elif token.isupper():

@@ -1,5 +1,23 @@
 from .constants import BLOCK_SEP, LOOP_END, VARIABLE_END, FUNCTION_END, LOOP_SEP, LIST_END
 from .cust_types import Block, ForLoop, Variable, ElementMover, Jump, Function, WhileLoop, List, ElementGetter
+from .stack_ops import is_int
+
+
+def parse_number(instructions, pointer=0):
+    number = instructions[pointer]
+    if number == BLOCK_SEP:
+        block_pointer, block = parse_block(instructions, pointer)
+        number = block.val
+        pointer += block_pointer
+    elif number.startswith('-'):
+        number = int(instructions[pointer] + instructions[pointer + 1])
+        pointer += 2
+    elif is_int(number):
+        number = int(instructions[pointer])
+        pointer += 1
+    else:
+        pointer += 1
+    return pointer, number
 
 
 def parse_block(instructions, pointer=0):
@@ -11,17 +29,14 @@ def parse_block(instructions, pointer=0):
     return pointer, Block(value)
 
 
-def parse_loop(instructions, pointer):
+def parse_for_loop(instructions, pointer):
     start = pointer
     while instructions[pointer] != LOOP_END:
         pointer += 1
     command = instructions[start + 1:pointer]
     command, _, loop_count = command.rpartition(LOOP_SEP)
-    if BLOCK_SEP in loop_count:
-        block_pointer, block = parse_block(loop_count)
-        loop_count = block.val
-        pointer += block_pointer
-    pointer += 1  # To ignore the end of the loop block.
+    loop_pointer, number = parse_number(loop_count)
+    pointer += loop_pointer + 1  # To ignore the end of the loop block.
     return pointer, ForLoop(command, loop_count)
 
 
@@ -29,37 +44,19 @@ def parse_constant(instructions, pointer):
     pointer += 1
     variable_name = instructions[pointer]
     pointer += 1
-    value = instructions[pointer]
-    if value == BLOCK_SEP:
-        block_pointer, block = parse_block(instructions[pointer:])
-        value = block.val
-        pointer += block_pointer
-    else:
-        pointer += 1
+    pointer, value = parse_number(instructions, pointer)
     return pointer, Variable(variable_name, value)
 
 
 def parse_move_element(instructions, pointer):
     pointer += 1
-    if instructions[pointer] == BLOCK_SEP:
-        block_length, block = parse_block(instructions[pointer:])
-        new_loc = block.val
-        pointer += block_length
-    else:
-        new_loc = instructions[pointer]
-        pointer += 1  # So that the pointer we return is past the value of the setter
+    pointer, new_loc = parse_number(instructions, pointer)
     return pointer, ElementMover(new_loc)
 
 
 def parse_get_element(instructions, pointer):
     pointer += 1
-    if instructions[pointer] == BLOCK_SEP:
-        block_length, block = parse_block(instructions[pointer:])
-        new_loc = block.val
-        pointer += block_length
-    else:
-        new_loc = instructions[pointer]
-        pointer += 1  # So that the pointer we return is past the value of the setter
+    pointer, new_loc = parse_number(instructions, pointer)
     return pointer, ElementGetter(new_loc)
 
 
@@ -119,12 +116,6 @@ def parse_list(instructions, pointer):
 
 def parse_if(instructions, pointer):
     pointer += 1
-    condition = instructions[pointer]
-    if BLOCK_SEP in condition:
-        block_start = condition.find(BLOCK_SEP)
-        block_pointer, block = parse_block(condition, block_start)
-        condition = block.val
-        pointer += block_pointer
-    clear_stack = condition.isnumeric()
-    pointer += 1
+    pointer, condition = parse_number(instructions, pointer)
+    clear_stack = is_int(condition)
     return pointer, Jump(condition, clear_stack)
