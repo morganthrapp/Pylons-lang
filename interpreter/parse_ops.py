@@ -1,5 +1,5 @@
 from .constants import BLOCK_SEP, LOOP_END, VARIABLE_END, FUNCTION_END, LOOP_SEP, LIST_END
-from .cust_types import Block, ForLoop, Variable, PointerSetter, Jump, Function, WhileLoop, List
+from .cust_types import Block, ForLoop, Variable, ElementGetter, Jump, Function, WhileLoop, List
 
 
 def parse_block(instructions, pointer=0):
@@ -39,7 +39,7 @@ def parse_constant(instructions, pointer):
     return pointer, Variable(variable_name, value)
 
 
-def parse_set_pointer(instructions, pointer):
+def parse_move_element(instructions, pointer):
     pointer += 1
     if instructions[pointer] == BLOCK_SEP:
         block_length, block = parse_block(instructions[pointer:])
@@ -48,7 +48,7 @@ def parse_set_pointer(instructions, pointer):
     else:
         new_loc = instructions[pointer]
         pointer += 1  # So that the pointer we return is past the value of the setter
-    return pointer, PointerSetter(new_loc)
+    return pointer, ElementGetter(new_loc)
 
 
 def parse_variable(instructions, pointer):

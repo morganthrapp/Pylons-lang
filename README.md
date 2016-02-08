@@ -86,13 +86,14 @@ Implicitly prints the stack at the end of the instruction set.
 | a       | Get the first stack[-1] digits of pi. If the stack is empty, returns the first 100.                      |
 | h       | Push the top of the stack to the list in stack[-2].                                                      |
 | _       | Check if the top of the stack is in the stack excluding the top.                                         |
+| y       | Zip the stack into sub lists                                                                             |
 
 
 ## Complex Commands ##
 
 | Command        | Result                                                                                        |
 |----------------|-----------------------------------------------------------------------------------------------|
-| ;(value)       | Set the stack pointer equal to value.                                                         |
+| ;(value)       | Move the element of the stack in position (value) to the top of the stack.                    |
 | f(name)(body)@ | Create a function. Uses . for args that get replaced with the top of the stack left to right. |
 | (values)       | Create a list. Any operation done on a list is done matrix wise. Ex. `1(234)-s == [6]`.       |
 | ?(condition)   | If statement. If stack[-1] == condition, skip the next instruction.                           |

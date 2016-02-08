@@ -301,3 +301,8 @@ def is_in(_stack):
         return int(_stack[-1] in _stack[:-1])
     else:
         return 0
+
+
+def stack_zip(_stack):
+    stack = [List(list(a)) for a in zip(_stack[::2], _stack[1::2])]
+    return stack
