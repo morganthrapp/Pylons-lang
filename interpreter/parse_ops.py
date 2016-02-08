@@ -1,4 +1,4 @@
-from .constants import BLOCK_SEP, LOOP_END, VARIABLE_END, FUNCTION_END
+from .constants import BLOCK_SEP, LOOP_END, VARIABLE_END, FUNCTION_END, LOOP_SEP, LIST_END
 from .cust_types import Block, ForLoop, Variable, PointerSetter, Jump, Function, WhileLoop, List
 
 
