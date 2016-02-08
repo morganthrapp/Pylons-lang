@@ -105,3 +105,5 @@ The following variables have been pre-initialized to useful values.
 |----------|-------|
 | A        | -1    |
 | B        | 10    |
+| C        | 100   |
+| D        | 1000  |

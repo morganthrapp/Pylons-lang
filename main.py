@@ -12,7 +12,7 @@ def run(instructions, stack=None, pointer=0, global_vars=None, functions=None):
         except AttributeError:
             print(stack)
     if not global_vars:
-        global_vars = {'A': -1, 'B': 10}
+        global_vars = {'A': -1, 'B': 10, 'C': 100, 'D': 1000}
     if not functions:
         functions = {}
     tokens = tokenize(instructions)
