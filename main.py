@@ -1,5 +1,6 @@
 from interpreter.constants import COMPLEX_TOKENS, COMMANDS, FUNCTION_ARG, STRING_MODE
-from interpreter.cust_types import Block, ForLoop, Variable, ElementMover, Jump, Function, WhileLoop, List, ElementGetter
+from interpreter.cust_types import Block, ForLoop, Variable, ElementMover, Jump, Function, WhileLoop, List, \
+     ElementGetter, Truncate
 from interpreter.stack_ops import is_int
 import copy
 
@@ -63,6 +64,8 @@ def run(instructions, stack=None, pointer=0, global_vars=None, functions=None):
                 stack = run(token.command, stack, global_vars=global_vars, functions=functions)
         elif isinstance(token, List):
             stack.append(token)
+        elif isinstance(token, Truncate):
+            stack = stack[:-token.length]
         elif token.isnumeric():
             stack.append(int(token))
         elif token in COMMANDS:

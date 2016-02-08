@@ -1,5 +1,5 @@
 from .constants import BLOCK_SEP, LOOP_END, VARIABLE_END, FUNCTION_END, LOOP_SEP, LIST_END
-from .cust_types import Block, ForLoop, Variable, ElementMover, Jump, Function, WhileLoop, List, ElementGetter
+from .cust_types import Block, ForLoop, Variable, ElementMover, Jump, Function, WhileLoop, List, ElementGetter, Truncate
 from .stack_ops import is_int
 
 
@@ -36,7 +36,7 @@ def parse_for_loop(instructions, pointer):
     command = instructions[start + 1:pointer]
     command, _, loop_count = command.rpartition(LOOP_SEP)
     loop_pointer, number = parse_number(loop_count)
-    pointer += loop_pointer + 1  # To ignore the end of the loop block.
+    pointer += loop_pointer
     return pointer, ForLoop(command, loop_count)
 
 
@@ -100,7 +100,6 @@ def parse_while_loop(instructions, pointer):
         block_start = loop_condition.find(BLOCK_SEP)
         block_pointer, block = parse_block(loop_condition, block_start)
         loop_condition = loop_condition[:block_start] + block.val + loop_condition[block_pointer:]
-    pointer += 1  # To skip the end of the loop block.
     return pointer, WhileLoop(command, loop_condition)
 
 
@@ -119,3 +118,9 @@ def parse_if(instructions, pointer):
     pointer, condition = parse_number(instructions, pointer)
     clear_stack = is_int(condition)
     return pointer, Jump(condition, clear_stack)
+
+
+def parse_truncate(instructions, pointer):
+    pointer += 1
+    pointer, length = parse_number(instructions, pointer)
+    return pointer, Truncate(length)

@@ -16,10 +16,11 @@ LIST_END = ')'
 JUMP_START = '?'
 LOOP_SEP = ','
 ELEMENT_ACCESS = '@'
+TRUNCATE_STACK = '='
 
 # This is so that we don't get circular imports.
 from .parse_ops import parse_variable, parse_move_element, parse_constant, parse_for_loop, parse_block, parse_jump_if_zero, \
-    parse_function, parse_while_loop, parse_list, parse_if, parse_get_element
+    parse_function, parse_while_loop, parse_list, parse_if, parse_get_element, parse_truncate
 from .stack_ops import add, sub, mul, div, is_prime, char_print, sqr, exp, swap, get_input, mod, bitwise_and, \
     bitwise_or, bitwise_xor, bitwise_twos, bitwise_lshift, bitwise_rshift, stack_len, stack_sum, clear_stack, \
     pop_stack, get_top, get_bottom, duplicate, greater_than, sort, reverse, permutations, print_stack, count, \
@@ -37,6 +38,7 @@ COMPLEX_TOKENS = {
     LIST_START: parse_list,
     JUMP_START: parse_if,
     ELEMENT_ACCESS: parse_get_element,
+    TRUNCATE_STACK: parse_truncate,
 }
 
 COMMANDS = {

@@ -43,6 +43,11 @@ class WhileLoop:
         self.condition = condition
 
 
+class Truncate:
+    def __init__(self, length):
+        self.length = length - 1
+
+
 class List:
     def __init__(self, val):
         self.val = val
