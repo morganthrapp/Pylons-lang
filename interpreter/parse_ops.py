@@ -1,10 +1,5 @@
-<<<<<<< HEAD
 from .constants import BLOCK_SEP, LOOP_END, VARIABLE_END, FUNCTION_END
 from .cust_types import Block, ForLoop, Variable, PointerSetter, Jump, Function, WhileLoop, List
-=======
-from .constants import BLOCK_SEP, LOOP_END, VARIABLE_END, FUNCTION_END, LIST_END, LOOP_SEP
-from .cust_types import Block, ForLoop, Variable, PointerSetter, JumpZero, Function, WhileLoop, List
->>>>>>> 86c0474d67a9ffa6a470086cdaf61768f31142aa
 
 
 def parse_block(instructions, pointer=0):

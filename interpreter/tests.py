@@ -54,17 +54,14 @@ assert run('(12)(123)+') == [[4, 5, 6]]
 assert run('(12)(123)*') == [[3, 6, 9]]
 assert run('2[At],') == []
 assert run('2[At]') == [2]
-<<<<<<< HEAD
 assert run('2?24') == [2]
 assert run('2?32') == [2, 2]
 assert run(':A3A?3A') == [3]
 assert run('2?t2') == [2]
-=======
 assert run('[C0]') == []
 assert run('[C00+]') == []
 assert run('2[C]C+') == [4]
 assert run('[C3]{C#10#+[C1C-],3}') == [13, 12, 11]
 assert run('[C3]{C#10#+1C-[C],,3}') == [13, 12, 11]
->>>>>>> 86c0474d67a9ffa6a470086cdaf61768f31142aa
 
 print('All tests passed!')
