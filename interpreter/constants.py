@@ -78,4 +78,4 @@ COMMANDS = {
     '_': is_in,
 }
 
-# Unused symbols [@, $, _, =, k, y]
+# Unused symbols [@, $, =, k, y]
