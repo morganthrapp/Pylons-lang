@@ -85,6 +85,7 @@ Implicitly prints the stack at the end of the instruction set.
 | r       | Push a random int to the top of the stack.                                                               |
 | a       | Get the first stack[-1] digits of pi. If the stack is empty, returns the first 100.                      |
 | h       | Push the top of the stack to the list in stack[-2]                                                       |
+| _       | Check if the top of the stack is in the stack[:-1]                                                       |
 
 
 ## Complex Commands ##

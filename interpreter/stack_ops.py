@@ -5,6 +5,14 @@ from random import randint
 from .cust_types import List
 
 
+def is_int(val):
+    try:
+        int(val)
+        return True
+    except ValueError:
+        return False
+
+
 def add(_stack):
     if len(_stack) > 1:
         new_val = _stack[-1] + _stack[-2]
@@ -79,7 +87,7 @@ def is_prime(_stack):
 
 def get_input(_stack):
     for arg in sys.argv:
-        if arg.isnumeric():
+        if is_int(arg):
             _stack.append(int(arg))
         else:
             _stack += map(ord, arg)
@@ -286,3 +294,10 @@ def random(_stack):
         rand_val = randint(start, end)
     _stack.append(rand_val)
     return _stack
+
+
+def is_in(_stack):
+    if len(_stack) > 1:
+        return int(_stack[-1] in _stack[:-1])
+    else:
+        return 0
