@@ -13,7 +13,7 @@ Implicitly prints the stack at the end of the instruction set.
 
 # How to run.
 
-    `py -3 main.py program.p *args`
+    py -3 main.py program.p *args
     
 
 # Some examples.
@@ -35,7 +35,7 @@ Implicitly prints the stack at the end of the instruction set.
 
 | Command | Result                                                                                                     |
 |---------|------------------------------------------------------------------------------------------------------------|
-| \d+     | Push the number to the stack.                                                                              |
+| -?\d    | Push the number to the stack.                                                                              |
 | #\d+#   | Push the number between the # marks to the stack.                                                          |
 | +-/*%   | Basic arithmetic operations.                                                                               |
 | <>|&^~  | Left shift, right shift, or, and, xor, twos compliment. Twos compliment only affects the top of the stack. |
