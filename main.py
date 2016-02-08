@@ -1,5 +1,5 @@
 from interpreter.constants import COMPLEX_TOKENS, COMMANDS, FUNCTION_ARG, STRING_MODE
-from interpreter.cust_types import Block, ForLoop, Variable, PointerSetter, JumpZero, Function, WhileLoop, List
+from interpreter.cust_types import Block, ForLoop, Variable, PointerSetter, Jump, Function, WhileLoop, List
 import copy
 
 
@@ -35,8 +35,13 @@ def run(instructions, stack=None, pointer=0, global_vars=None, functions=None):
             continue
         elif isinstance(token, Function):
             functions[token.name] = token.command
-        elif isinstance(token, JumpZero):
-            if stack[-1] == 0:
+        elif isinstance(token, Jump):
+            # Certain jump types require an empty stack, others need the current value of the stack
+            if token.clear_stack:
+                _stack = []
+            else:
+                _stack = stack
+            if stack[-1] == sum(run(token.condition, stack=_stack, functions=functions, global_vars=global_vars)):
                 pointer += 2  # We skip the jump command and the next one.
                 continue
         elif isinstance(token, ForLoop):

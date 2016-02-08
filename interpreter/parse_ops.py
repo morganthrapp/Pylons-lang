@@ -1,5 +1,5 @@
 from .constants import BLOCK_SEP, LOOP_END, VARIABLE_END, FUNCTION_END
-from .cust_types import Block, ForLoop, Variable, PointerSetter, JumpZero, Function, WhileLoop, List
+from .cust_types import Block, ForLoop, Variable, PointerSetter, Jump, Function, WhileLoop, List
 
 
 def parse_block(instructions, pointer=0):
@@ -67,7 +67,7 @@ def parse_variable(instructions, pointer):
 
 
 def parse_jump_if_zero(instructions, pointer):
-    return pointer + 1, JumpZero()
+    return pointer + 1, Jump()
 
 
 def parse_function(instructions, pointer):
@@ -82,8 +82,7 @@ def parse_function(instructions, pointer):
 
 def parse_while_loop(instructions, pointer):
     start = pointer
-    while instructions[pointer] != LOOP_END:
-        pointer += 1
+    pointer = instructions[start:].find(LOOP_END) + start
     command = instructions[start + 1:pointer]
     command, loop_condition = command.split(',')
     if BLOCK_SEP in loop_condition:
@@ -102,3 +101,16 @@ def parse_list(instructions, pointer):
     pointer += len(list_body) + 1
     list_val = run(list_body)
     return pointer, List(list_val)
+
+
+def parse_if(instructions, pointer):
+    pointer += 1
+    condition = instructions[pointer]
+    if BLOCK_SEP in condition:
+        block_start = condition.find(BLOCK_SEP)
+        block_pointer, block = parse_block(condition, block_start)
+        condition = block.val
+        pointer += block_pointer
+    clear_stack = condition.isnumeric()
+    pointer += 1
+    return pointer, Jump(condition, clear_stack)

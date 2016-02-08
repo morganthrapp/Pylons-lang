@@ -20,8 +20,10 @@ class PointerSetter:
         self.location = int(loc)
 
 
-class JumpZero:
-    pass
+class Jump:
+    def __init__(self, condition='0', clear_stack=False):
+        self.condition = condition
+        self.clear_stack = clear_stack
 
 
 class Function:

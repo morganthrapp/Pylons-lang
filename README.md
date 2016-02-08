@@ -58,4 +58,5 @@ Implicitly prints the stack at the end of the instruction set.
 1. Quit without printing the stack with `@`
 1. Push the top of the stack to a list with `h`. Ex, `:A()A1h == [List(1)]` 
 1. Get the first `stack[-1]` digits of pi. If the stack is empty, returns the first 100.
+1. If statements with `?{condition}`. If `_stack[-1] == condition`, jump past the next instruction 
  
