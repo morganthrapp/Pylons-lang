@@ -20,6 +20,11 @@ Implicitly prints the stack at the end of the instruction set.
     0{d1+,i}c         # Print the ascii table (0,sys.argv[0]]
     i:At,{n,A}j@      # [Look and Say](https://oeis.org/A005150)
     11fA..+@{A,i}     # First sys.argv[0] Fibonacci numbers
+    
+
+# Bonus quine, all credit to [kms7047](https://github.com/kms70847)
+    
+    #272905715458918625954929791277018732980372648151923925534616453307621588598692438414443279763003025372409097795417741330602167388103514682342382282390274176094981540184583036198531713253138700693955928801808034338692982310398308250577863556014805403336841267395172018000805496670641969318196854690330530651#[S],#35#[L0][TS]w[LL1+][T#10#T/],0Tg}[C1L-]{#10#C#10#eS/%#48#+[C1C-],L}#35#[L0][TS]w[LL1+][T8T>],0Tg}[C0]{#256#C8*S>%[C1C+],L}c
 
 
 # Supports the following operations:
@@ -36,7 +41,7 @@ Implicitly prints the stack at the end of the instruction set.
 1. Printing the stack as a string `c`. Exits after printing.
 1. Swap the top of the stack `\`
 1. Constants with `:name(value or block)`. Ex: `:A1`. Currently these all have to be declared at the start of the program.
-1. Variables with `[name(value or block)]`. Ex: `[A12+] == [3]` or `[A#11#2+]A == [13]`. Variables can only be an integer, not complex types for now.
+1. Variables with `[name(value or block)]`. Ex: `[A12+] == [3]` or `[A#11#2+]A == [13]`. Variables can only be an integer, not complex types for now. If you declare a variable without a value, it will automatically take the value of the top of the stack.
 1. Taking command line input with `i`.
 1. Set the stack pointer to a specific location `;(value or block)`. Zero indexed.
 1. Functions with `f(name)(body)@`. Uses `.` for args that get replaced with the top of the stack left to right. Not super stable right now. Ex. `2fA2+@ == [4]` 
@@ -58,5 +63,9 @@ Implicitly prints the stack at the end of the instruction set.
 1. Quit without printing the stack with `@`
 1. Push the top of the stack to a list with `h`. Ex, `:A()A1h == [List(1)]` 
 1. Get the first `stack[-1]` digits of pi. If the stack is empty, returns the first 100.
+<<<<<<< HEAD
 1. If statements with `?{condition}`. If `_stack[-1] == condition`, jump past the next instruction 
+=======
+1. Append a random int to the top of the stack with `r`. If there is more than one value on the stack, it does `randint(_stack[-2], _stack[-1])`. If there's only one value on the stack it does `randint(0, _stack[-1])`. If the stack is empty it does `randint(0, sys.maxsize)`.
+>>>>>>> 86c0474d67a9ffa6a470086cdaf61768f31142aa
  

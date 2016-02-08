@@ -1,6 +1,7 @@
 import itertools
 import math
 import sys
+from random import randint
 from .cust_types import List
 
 
@@ -269,3 +270,19 @@ def pi(_stack):
     pi_val = str(math.pi)[:digits + 1].replace('.', '')
     _stack += list(map(int, pi_val))
     return
+
+
+def random(_stack):
+    start = 0
+    end = sys.maxsize
+    if len(_stack) > 2:
+        start = _stack[-1]
+        end = _stack[-2]
+        rand_val = randint(start, end)
+    elif len(_stack) > 1:
+        end = _stack[-1]
+        rand_val = randint(start, end)
+    else:
+        rand_val = randint(start, end)
+    _stack.append(rand_val)
+    return _stack
