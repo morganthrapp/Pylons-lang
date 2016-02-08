@@ -7,6 +7,8 @@ All commands operate as follows `stack[-1] op stack[-2]` unless otherwise specif
 
 Variables and constants must be defined with capital letters.
 
+Any place you can use an integer literal, you can use a command, variable, or function.
+
 Implicitly prints the stack at the end of the instruction set.
 
 # How to run.
@@ -40,44 +42,56 @@ Implicitly prints the stack at the end of the instruction set.
 
 
 ## Variables ##
-* Constants with `:name(value or block)`. Ex: `:A1`. Currently these all have to be declared at the start of the program.
-* Variables with `[name(value or block)]`. Ex: `[A12+] == [3]` or `[A#11#2+]A == [13]`. Variables can only be an integer, not complex types for now. If you declare a variable without a value, it will automatically take the value of the top of the stack.
+
+| Command                  | Result                                                                            |
+|--------------------------|-----------------------------------------------------------------------------------|
+| :name(value)             | Creates a constant.                                                               |
+| [name(value or command)] | Create a variable. If no value is given, takes the value of the top of the stack. |
 
 
 ## Loops ##
-* For loops `{command,count}`. This works with an integer or a block for count.
-* While loop with `w(command),(condition}`. Ex. `1w1+,5g} == [5]`
+
+| Command                | Result                                                 |
+|------------------------|--------------------------------------------------------|
+| {command,count}        | For loop. Repeats command count times.                 |
+| w(command),(condition} | While loop, repeat command while condition is truthy.  |
 
 
 ## Stack Commands ##
-* Square root `s`. Sets the top of the stack equal to the square root of the previous top of stack. Ex. `4s == [2]`
-* Exponential multiplication `e`. 
-* Print the stack with `p`.
-* Check the primality of the top of the stack `m`.
-* Printing the stack as a string `c`. Exits after printing.
-* Swap the top of the stack `\`
-* Taking command line input with `i`.
-* Sum the stack with `s`. Sets the stack equal to the sum of the stack.
-* Append the length of the stack with `l`. Sets the stack equal to the length of the stack before this command.
-* Clear the stack with `x`.
-* Pop and discard the top of the stack with `,`.
-* Get the top/bottom of the stack with `t` and `b` respectively. Sets the stack/variable to the top/bottom of the stack.
-* Duplicate the top of the stack with `d`.
-* Check if `_stack[-1] > _stack[-2]` with `g`. This overwrites the stack, so it should only be used for a variable or a while loop.
-* Sort the stack with <code>`</code>.
-* Reverse the stack with `v`.
-* Get all possible permutations of the stack with `m`. This returns a list of tuples, so caution should be used. It's also not very efficient.
-* Factorial of the top of the stack with `!`. 
-* Count the items in the stack with `o`. Sets the stack equal to `[count, element...]` for each element in the stack.
-* Join and print the stack with `j`. Exits after printing.
-* Quit without printing the stack with `@`
-* Append a random int to the top of the stack with `r`. If there is more than one value on the stack, it does `randint(_stack[-2], _stack[-1])`. If there's only one value on the stack it does `randint(0, _stack[-1])`. If the stack is empty it does `randint(0, sys.maxsize)`.
- 
+
+| Command | Result                                                                                                   |
+|---------|----------------------------------------------------------------------------------------------------------|
+| q       | Sets the top of the stack equal to the square root of the previous top of stack.                         |
+| e       | Set the top of the stack equal to stack[-2] ** stack[-1]                                                 |
+| p       | Print the stack.                                                                                         |
+| m       | Return the primality of the top of the stack.                                                            |
+| c       | Print the stack as a string. Exits after printing.                                                       |
+| \       | Swap the top two elements of the stack.                                                                  |
+| i       | Take command line arguments and put them on the stack.                                                   |
+| s       | Sum the stack and return it.                                                                             |
+| l       | Return the length of the stack.                                                                          |
+| x       | Clear the stack.                                                                                         |
+| ,       | Pop the top of the stack and discard it.                                                                 |
+| t       | Get the top of the stack.                                                                                |
+| b       | Get the bottom of the stack.                                                                             |
+| d       | Duplicate the top of the stack.                                                                          |
+| g       | Check if stack[-1] > stack[-2]                                                                           |
+| `       | Sort the stack.                                                                                          |
+| v       | Reverse the stack.                                                                                       |
+| !       | Returns the factorial of the top of the stack.                                                           |
+| o       | Count the items in the stack. Sets the stack equal to [count, element...] for each element in the stack. |
+| j       | Join and print the stack. Exits after printing.                                                          |
+| @       | Quit without printing the stack.                                                                         |
+| r       | Push a random int to the top of the stack.                                                               |
+| a       | Get the first stack[-1] digits of pi. If the stack is empty, returns the first 100.                      |
+| h       | Push the top of the stack to the list in stack[-2]                                                       |
+
 
 ## Complex Commands ##
-* Set the stack pointer to a specific location `;(value or block)`. Zero indexed.
-* Functions with `f(name)(body)@`. Uses `.` for args that get replaced with the top of the stack left to right. Not super stable right now. Ex. `2fA2+@ == [4]` 
-* Create a list with `({values})`. Any operation done on a list is done matrix wise. Ex. `1(234)-s == [6]`.
-* Push the top of the stack to a list with `h`. Ex, `:A()A1h == [List(1)]` 
-* Get the first `stack[-1]` digits of pi. If the stack is empty, returns the first 100.
-* If statements with `?{condition}`. If `_stack[-1] == condition`, jump past the next instruction 
+
+| Command        | Result                                                                                        |
+|----------------|-----------------------------------------------------------------------------------------------|
+| ;(value)       | Set the stack pointer equal to value.                                                         |
+| f(name)(body)@ | Create a function. Uses . for args that get replaced with the top of the stack left to right. |
+| (values)       | Create a list. Any operation done on a list is done matrix wise. Ex. `1(234)-s == [6]`.       |
+| ?(condition)   | If statement. If stack[-1] == condition, skip the next instruction.                           |
