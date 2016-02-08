@@ -2,7 +2,7 @@ BLOCK_SEP = '#'
 WHILE_LOOP_START = 'w'
 LOOP_START = '{'
 LOOP_END = '}'
-ELEMENT_GET = ';'
+ELEMENT_MOVE = ';'
 CONSTANT_SEP = ':'
 VARIABLE_START = '['
 VARIABLE_END = ']'
@@ -15,18 +15,19 @@ LIST_START = '('
 LIST_END = ')'
 JUMP_START = '?'
 LOOP_SEP = ','
+ELEMENT_ACCESS = '@'
 
 # This is so that we don't get circular imports.
 from .parse_ops import parse_variable, parse_move_element, parse_constant, parse_loop, parse_block, parse_jump_if_zero, \
-    parse_function, parse_while_loop, parse_list, parse_if
+    parse_function, parse_while_loop, parse_list, parse_if, parse_get_element
 from .stack_ops import add, sub, mul, div, is_prime, char_print, sqr, exp, swap, get_input, mod, bitwise_and, \
     bitwise_or, bitwise_xor, bitwise_twos, bitwise_lshift, bitwise_rshift, stack_len, stack_sum, clear_stack, \
     pop_stack, get_top, get_bottom, duplicate, greater_than, sort, reverse, permutations, print_stack, count, \
-    join_print, factorial, run_length_encoding, push, this_isnt_golf_script, pi, random, is_in, stack_zip
+    join_print, factorial, run_length_encoding, push, this_isnt_golf_script, pi, random, is_in, stack_zip, push_range
 
 COMPLEX_TOKENS = {
     VARIABLE_START: parse_variable,
-    ELEMENT_GET: parse_move_element,
+    ELEMENT_MOVE: parse_move_element,
     CONSTANT_SEP: parse_constant,
     LOOP_START: parse_loop,
     BLOCK_SEP: parse_block,
@@ -34,7 +35,8 @@ COMPLEX_TOKENS = {
     FUNCTION_START: parse_function,
     WHILE_LOOP_START: parse_while_loop,
     LIST_START: parse_list,
-    JUMP_START: parse_if
+    JUMP_START: parse_if,
+    ELEMENT_ACCESS: parse_get_element,
 }
 
 COMMANDS = {
@@ -77,6 +79,7 @@ COMMANDS = {
     'r': random,
     '_': is_in,
     'y': stack_zip,
+    'k': push_range,
 }
 
-# Unused symbols [@, $, =, k, y]
+# Unused symbols [@, $, =]

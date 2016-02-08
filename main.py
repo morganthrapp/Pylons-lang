@@ -1,5 +1,5 @@
 from interpreter.constants import COMPLEX_TOKENS, COMMANDS, FUNCTION_ARG, STRING_MODE
-from interpreter.cust_types import Block, ForLoop, Variable, ElementGetter, Jump, Function, WhileLoop, List
+from interpreter.cust_types import Block, ForLoop, Variable, ElementMover, Jump, Function, WhileLoop, List, ElementGetter
 import copy
 
 
@@ -32,9 +32,11 @@ def run(instructions, stack=None, pointer=0, global_vars=None, functions=None):
                     global_vars[token.name] = sum(run(token.val, stack=stack, functions=functions, global_vars=global_vars))
             else:
                 global_vars[token.name] = int(token.val)
-        elif isinstance(token, ElementGetter):
+        elif isinstance(token, ElementMover):
             new_top = stack.pop(token.location)
             stack.append(new_top)
+        elif isinstance(token, ElementGetter):
+            stack.append(stack[token.location])
         elif isinstance(token, Function):
             if token.name in global_vars:
                 global_vars.pop(token.name)

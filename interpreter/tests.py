@@ -63,5 +63,6 @@ assert run('2[C]C+') == [4]
 assert run('[C3]{C#10#+[C1C-],3}') == [13, 12, 11]
 assert run('[C3]{C#10#+1C-[C],,3}') == [13, 12, 11]
 assert run('234567y') == [[2, 3], [4, 5], [6, 7]]
+assert run('123@1') == [1, 2, 3, 2]
 
 print('All tests passed!')

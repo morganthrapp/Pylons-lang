@@ -15,6 +15,11 @@ class Variable:
         self.val = val
 
 
+class ElementMover:
+    def __init__(self, loc):
+        self.location = int(loc)
+
+
 class ElementGetter:
     def __init__(self, loc):
         self.location = int(loc)

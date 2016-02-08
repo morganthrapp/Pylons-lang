@@ -87,6 +87,7 @@ Implicitly prints the stack at the end of the instruction set.
 | h       | Push the top of the stack to the list in stack[-2].                                                      |
 | _       | Check if the top of the stack is in the stack excluding the top.                                         |
 | y       | Zip the stack into sub lists                                                                             |
+| k       | Append 1..stack[-1]. Consumes stack[-1]                                                                  |
 
 
 ## Complex Commands ##
@@ -97,6 +98,7 @@ Implicitly prints the stack at the end of the instruction set.
 | f(name)(body)@ | Create a function. Uses . for args that get replaced with the top of the stack left to right. |
 | (values)       | Create a list. Any operation done on a list is done matrix wise. Ex. `1(234)-s == [6]`.       |
 | ?(condition)   | If statement. If stack[-1] == condition, skip the next instruction.                           |
+| @(value)       | Copy the element at value (zero indexed) to the top of the stack                              |
 
 
 ## Pre-initialized Variables ##

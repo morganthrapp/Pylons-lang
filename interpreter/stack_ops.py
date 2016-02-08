@@ -306,3 +306,10 @@ def is_in(_stack):
 def stack_zip(_stack):
     stack = [List(list(a)) for a in zip(_stack[::2], _stack[1::2])]
     return stack
+
+
+def push_range(_stack):
+    end_range = _stack.pop()
+    _stack.extend(range(1, end_range + 1))
+    return _stack
+
