@@ -38,7 +38,11 @@ def run(instructions, stack=None, pointer=0, global_vars=None, functions=None):
             new_top = stack.pop(token.location)
             stack.append(new_top)
         elif isinstance(token, ElementGetter):
-            stack.append(stack[token.location])
+            if is_int(token.location):
+                stack.append(stack[token.location])
+            else:
+                loc = sum(run(token.location, functions=functions, global_vars=global_vars))
+                stack.append(stack[loc])
         elif isinstance(token, Function):
             if token.name in global_vars:
                 global_vars.pop(token.name)

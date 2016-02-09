@@ -22,7 +22,7 @@ class ElementMover:
 
 class ElementGetter:
     def __init__(self, loc):
-        self.location = int(loc)
+        self.location = loc
 
 
 class Jump:
