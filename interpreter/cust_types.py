@@ -48,6 +48,39 @@ class Truncate:
         self.length = length - 1
 
 
+class Pointer:
+    def __init__(self, loc=0):
+        self.location = loc
+
+    def __add__(self, other):
+        self.location += other
+        return self
+
+    def __radd__(self, other):
+        self.location += other
+        return self
+
+    def __int__(self):
+        return self.location
+
+    def __index__(self):
+        return int(self.location)
+
+    def __lt__(self, other):
+        return self.location < other
+
+    def __gt__(self, other):
+        return self.location > other
+
+    def __getitem__(self, item):
+        return Pointer(self.location)
+
+
+class Stack(list):
+    def __init__(self):
+        super().__init__()
+
+
 class List:
     def __init__(self, val):
         self.val = val

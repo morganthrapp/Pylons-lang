@@ -1,5 +1,6 @@
 from .constants import BLOCK_SEP, LOOP_END, VARIABLE_END, FUNCTION_END, LOOP_SEP, LIST_END
-from .cust_types import Block, ForLoop, Variable, ElementMover, Jump, Function, WhileLoop, List, ElementGetter, Truncate
+from .cust_types import Pointer, Block, ForLoop, Variable, ElementMover, Jump, Function, WhileLoop, List, \
+    ElementGetter, Truncate
 from .stack_ops import is_int
 
 
@@ -11,7 +12,7 @@ def parse_number(instructions, pointer=0):
         pointer += block_pointer
     elif number.startswith('-'):
         number = int(instructions[pointer] + instructions[pointer + 1])
-        pointer += 2
+        pointer += 1
     elif is_int(number):
         number = int(instructions[pointer])
         pointer += 1
@@ -30,9 +31,8 @@ def parse_block(instructions, pointer=0):
 
 
 def parse_for_loop(instructions, pointer):
-    start = pointer
-    while instructions[pointer] != LOOP_END:
-        pointer += 1
+    start = pointer[:]
+    pointer = instructions[start:].find(LOOP_END) + start[:]
     command = instructions[start + 1:pointer]
     command, _, loop_count = command.rpartition(LOOP_SEP)
     loop_pointer, number = parse_number(loop_count)
@@ -65,7 +65,7 @@ def parse_variable(instructions, pointer):
     pointer += 1  # Skip the initializer.
     name = instructions[pointer]
     pointer += 1  # Skip over the name.
-    variable_end_location = instructions[pointer:].find(VARIABLE_END) + pointer
+    variable_end_location = instructions[pointer[:]:].find(VARIABLE_END) + pointer[:]
     command = instructions[pointer:variable_end_location]
     if command.isnumeric():
         value = sum(run(command))
@@ -73,7 +73,7 @@ def parse_variable(instructions, pointer):
         value = command
     else:
         value = 't'
-    pointer = variable_end_location + 1 # Set the pointer to after the initialization block.
+    pointer = variable_end_location[:] + 1  # Set the pointer to after the initialization block.
     return pointer, Variable(name, value)
 
 
@@ -92,8 +92,8 @@ def parse_function(instructions, pointer):
 
 
 def parse_while_loop(instructions, pointer):
-    start = pointer
-    pointer = instructions[start:].find(LOOP_END) + start
+    start = pointer[:]
+    pointer = instructions[start:].find(LOOP_END) + start[:]
     command = instructions[start + 1:pointer]
     command, _, loop_condition = command.rpartition(LOOP_SEP)
     if BLOCK_SEP in loop_condition:
@@ -106,7 +106,7 @@ def parse_while_loop(instructions, pointer):
 def parse_list(instructions, pointer):
     from main import run  # We have to do it this way to avoid circular imports.
     pointer += 1
-    list_end = instructions[pointer:].find(LIST_END) + pointer
+    list_end = instructions[pointer:].find(LIST_END) + pointer[:]
     list_body = instructions[pointer:list_end]
     pointer += len(list_body) + 1
     list_val = run(list_body)
