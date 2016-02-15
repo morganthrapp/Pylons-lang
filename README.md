@@ -110,3 +110,4 @@ The following variables have been pre-initialized to useful values.
 | B        | 10    |
 | C        | 100   |
 | D        | 1000  |
+| E        | 0     |

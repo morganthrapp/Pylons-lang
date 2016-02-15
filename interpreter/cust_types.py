@@ -56,9 +56,12 @@ class Pointer:
         self.location += other
         return self
 
-    def __radd__(self, other):
+    def __iadd__(self, other):
         self.location += other
         return self
+
+    def __radd__(self, other):
+        return self.__add__(other)
 
     def __int__(self):
         return self.location

@@ -13,7 +13,7 @@ def run(instructions, stack=None, pointer=None, global_vars=None, functions=None
     else:
         pointer = pointer
     if not global_vars:
-        global_vars = {'A': -1, 'B': 10, 'C': 100, 'D': 1000}
+        global_vars = {'A': -1, 'B': 10, 'C': 100, 'D': 1000, 'E': 0}
     if not functions:
         functions = {}
     tokens = tokenize(instructions)
@@ -22,7 +22,7 @@ def run(instructions, stack=None, pointer=None, global_vars=None, functions=None
         token = tokens[pointer]
         if token is None:
             pointer += 1
-            continue  # For now, the interpreter is super permissive.\
+            continue  # For now, the interpreter is super permissive.
         elif type(token) in RUN_ACTIONS:
             RUN_ACTIONS[type(token)](token, pointer, stack, functions, global_vars)
         elif token.isnumeric():
@@ -37,7 +37,7 @@ def run(instructions, stack=None, pointer=None, global_vars=None, functions=None
             while FUNCTION_ARG in command:
                 command = command.replace(FUNCTION_ARG, '#{}#'.format(str(stack[index])), 1)
                 index -= 1
-            stack = run(command, stack=stack, global_vars=global_vars, functions=functions)
+            stack = run(command, stack=stack[:], global_vars=global_vars, functions=functions)
         pointer += 1
     return stack
 
