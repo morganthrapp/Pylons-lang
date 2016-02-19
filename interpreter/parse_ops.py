@@ -78,7 +78,7 @@ def parse_variable(instructions, pointer):
 
 
 def parse_jump_if_zero(instructions, pointer):
-    return pointer + 1, Jump()
+    return pointer + 1, Jump(clear_stack=True)
 
 
 def parse_function(instructions, pointer):

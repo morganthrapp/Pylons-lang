@@ -43,6 +43,9 @@ Implicitly prints the stack at the end of the instruction set.
 
 ## Variables ##
 
+If the variable command is only one character, it assumes that you're operating on the stack.
+For example: :A1A1:A+xA == [2]
+
 | Command                  | Result                                                                            |
 |--------------------------|-----------------------------------------------------------------------------------|
 | :name(value)             | Creates a constant.                                                               |
