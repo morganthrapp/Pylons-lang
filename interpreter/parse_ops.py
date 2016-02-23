@@ -1,5 +1,5 @@
-from .constants import BLOCK_SEP, LOOP_END, VARIABLE_END, FUNCTION_END, LOOP_SEP, LIST_END
-from .cust_types import Pointer, Block, ForLoop, Variable, ElementMover, Jump, Function, WhileLoop, List, \
+from .constants import BLOCK_SEP, LOOP_END, VARIABLE_END, FUNCTION_END, LOOP_SEP, LIST_END, MAP_END
+from .cust_types import Map, Block, ForLoop, Variable, ElementMover, Jump, Function, WhileLoop, List, \
     ElementGetter, Truncate
 from .stack_ops import is_int
 
@@ -124,3 +124,11 @@ def parse_truncate(instructions, pointer):
     pointer += 1
     pointer, length = parse_number(instructions, pointer)
     return pointer, Truncate(length)
+
+
+def parse_map(instructions, pointer):
+    pointer += 1
+    map_end = instructions[pointer:].find(MAP_END) + pointer[:]
+    command = instructions[pointer:map_end]
+    pointer += len(command) + map_end
+    return pointer, Map(command)

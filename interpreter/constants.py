@@ -17,18 +17,21 @@ JUMP_START = '?'
 LOOP_SEP = ','
 ELEMENT_ACCESS = '@'
 TRUNCATE_STACK = '='
+MAP_START = "'"
+MAP_END = '}'
 
 # This is so that we don't get circular imports.
 from .parse_ops import parse_variable, parse_move_element, parse_constant, parse_for_loop, parse_block, \
-    parse_jump_if_zero, \
-    parse_function, parse_while_loop, parse_list, parse_if, parse_get_element, parse_truncate
+    parse_jump_if_zero, parse_function, parse_while_loop, parse_list, parse_if, parse_get_element, parse_truncate, \
+    parse_map
 from .stack_ops import add, sub, mul, div, is_prime, char_print, sqr, exp, swap, get_input, mod, bitwise_and, \
     bitwise_or, bitwise_xor, bitwise_twos, bitwise_lshift, bitwise_rshift, stack_len, stack_sum, clear_stack, \
     pop_stack, get_top, get_bottom, duplicate, greater_than, sort, reverse, permutations, print_stack, count, \
     join_print, factorial, run_length_encoding, push, this_isnt_golf_script, pi, random, is_in, stack_zip, push_range
 from .run_ops import run_block, run_variable, run_move, run_getter, run_define_function, run_jump, run_for_loop, \
-    run_while_loop, run_list, run_truncate
-from .cust_types import Block, Variable, ElementMover, ElementGetter, Function, Jump, ForLoop, WhileLoop, List, Truncate
+    run_while_loop, run_list, run_truncate, run_map
+from .cust_types import Block, Variable, ElementMover, ElementGetter, Function, Jump, ForLoop, WhileLoop, List, \
+    Truncate, Map
 
 COMPLEX_TOKENS = {
     VARIABLE_START: parse_variable,
@@ -43,6 +46,7 @@ COMPLEX_TOKENS = {
     JUMP_START: parse_if,
     ELEMENT_ACCESS: parse_get_element,
     TRUNCATE_STACK: parse_truncate,
+    MAP_START: parse_map
 }
 
 COMMANDS = {
@@ -98,7 +102,8 @@ RUN_ACTIONS = {
     ForLoop: run_for_loop,
     WhileLoop: run_while_loop,
     List: run_list,
-    Truncate: run_truncate
+    Truncate: run_truncate,
+    Map: run_map
 
 }
 

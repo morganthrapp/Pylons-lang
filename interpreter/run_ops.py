@@ -8,7 +8,8 @@ def run_variable(action, pointer, stack, functions, global_vars):
         if any(x in global_vars for x in action.val) or len(action.val) != 1:
             global_vars[action.name] = sum(run(action.val, functions=functions, global_vars=global_vars))
         else:
-            global_vars[action.name] = sum(run(action.val, stack=stack[:], functions=functions, global_vars=global_vars))
+            global_vars[action.name] = sum(
+                run(action.val, stack=stack[:], functions=functions, global_vars=global_vars))
     else:
         global_vars[action.name] = int(action.val)
 
@@ -67,3 +68,9 @@ def run_list(action, pointer, stack, functions, global_vars):
 
 def run_truncate(action, pointer, stack, functions, global_vars):
     stack[:] = stack[:-action.length]
+
+
+def run_map(action, pointer, stack, functions, global_vars):
+    from main import run
+    for x in range(len(stack)):
+        stack[x] = sum(run(action.command, [stack[x]], global_vars=global_vars, functions=functions))

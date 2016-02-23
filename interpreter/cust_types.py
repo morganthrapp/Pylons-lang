@@ -48,6 +48,11 @@ class Truncate:
         self.length = length - 1
 
 
+class Map:
+    def __init__(self, instruction):
+        self.command = instruction
+
+
 class Pointer:
     def __init__(self, loc=0):
         self.location = loc
