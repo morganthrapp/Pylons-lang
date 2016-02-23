@@ -101,7 +101,8 @@ For example: :A1A1:A+xA == [2]
 | f(name)(body)@ | Create a function. Uses . for args that get replaced with the top of the stack left to right. |
 | (values)       | Create a list. Any operation done on a list is done matrix wise. Ex. `1(234)-s == [6]`.       |
 | ?(condition)   | If statement. If stack[-1] == condition, skip the next instruction.                           |
-| @(value)       | Copy the element at value (zero indexed) to the top of the stack                              |
+| @(value)       | Copy the element at value (zero indexed) to the top of the stack.                             |
+| '(command)}    | Apply command to each element of the stack.                                                   |
 
 
 ## Pre-initialized Variables ##
