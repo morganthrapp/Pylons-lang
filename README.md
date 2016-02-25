@@ -90,7 +90,7 @@ For example: :A1A1:A+xA == [2]
 | h       | Push the top of the stack to the list in stack[-2].                                                      |
 | _       | Check if the top of the stack is in the stack excluding the top.                                         |
 | y       | Zip the stack into sub lists                                                                             |
-| k       | Append 1..stack[-1]. Consumes stack[-1]                                                                  |
+| k       | Append (stack[-2]..stack[-1]) to the stack. Consumes stack[-1] and stack[-2]                             |
 
 
 ## Complex Commands ##

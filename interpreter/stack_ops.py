@@ -310,6 +310,7 @@ def stack_zip(_stack):
 
 def push_range(_stack):
     end_range = _stack.pop()
-    _stack.extend(range(1, end_range + 1))
+    start_range = _stack.pop()
+    _stack.extend(range(start_range, end_range + 1))
     return _stack
 
